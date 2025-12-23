@@ -16,10 +16,10 @@ export function Hero() {
           Dinesh Ramar
         </h1>
         <p className="text-heading-2 mb-2 font-semibold text-muted-foreground">
-          React Frontend Developer
+          Frontend Developer
         </p>
-        <p className="text-body mb-8 text-muted-foreground">
-          4 years of experience
+        <p className="text-body mb-4 text-muted-foreground">
+          4 years of experience • Chennai, India
         </p>
         <p className="text-heading-3 mb-12 font-semibold">
           Building accessible, secure, and scalable React applications.

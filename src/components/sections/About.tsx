@@ -6,10 +6,11 @@ export function About() {
           About Me
         </h2>
         <p className="text-body mb-6 leading-relaxed">
-          I'm a React Frontend Developer with 4 years of experience crafting
-          user-centric web applications. My focus is on building clean,
-          maintainable code that prioritizes accessibility, security, and
-          performance.
+          Frontend Developer with 4 years of experience building enterprise and
+          production-ready web applications. Strong focus on clean UI
+          architecture, accessibility (WCAG 2.1 AA), performance optimization,
+          and security-aware frontend development (VAPT). Actively transitioning
+          to modern React-based frontend development.
         </p>
         <ul className="space-y-3 text-body">
           <li className="flex items-start">

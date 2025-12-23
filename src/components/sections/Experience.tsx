@@ -8,10 +8,10 @@ export function Experience() {
         <div className="space-y-6">
           <div>
             <h3 className="text-heading-2 mb-2 font-semibold">
-              Frontend React Developer
+              Frontend Developer
             </h3>
             <p className="text-body mb-4 text-muted-foreground">
-              <strong>Xerago</strong> • <time dateTime="2020">2020</time> - Present
+              <strong>Xerago, Chennai</strong> • <time dateTime="2021">2021</time> – Present
             </p>
             <ul className="space-y-3 text-body">
               <li className="flex items-start">
@@ -19,8 +19,8 @@ export function Experience() {
                   •
                 </span>
                 <span>
-                  Developed and maintained scalable React applications serving
-                  thousands of users
+                  Developed and maintained frontend features for enterprise web
+                  applications using Drupal, HTML, CSS, and JavaScript
                 </span>
               </li>
               <li className="flex items-start">
@@ -28,8 +28,8 @@ export function Experience() {
                   •
                 </span>
                 <span>
-                  Implemented accessibility-first UI components achieving WCAG
-                  2.1 AA compliance
+                  Worked on UI customization, accessibility improvements, and
+                  performance optimization
                 </span>
               </li>
               <li className="flex items-start">
@@ -37,8 +37,8 @@ export function Experience() {
                   •
                 </span>
                 <span>
-                  Collaborated with security teams to implement VAPT practices
-                  and secure coding standards
+                  Fixed React-based UI issues and implemented small feature
+                  enhancements in existing React components
                 </span>
               </li>
               <li className="flex items-start">
@@ -46,8 +46,8 @@ export function Experience() {
                   •
                 </span>
                 <span>
-                  Optimized application performance resulting in improved load
-                  times and user experience
+                  Applied accessibility-first practices to meet WCAG 2.1 AA
+                  guidelines
                 </span>
               </li>
               <li className="flex items-start">
@@ -55,8 +55,8 @@ export function Experience() {
                   •
                 </span>
                 <span>
-                  Mentored junior developers and established coding best
-                  practices within the team
+                  Collaborated with security teams to follow secure frontend
+                  coding practices (VAPT awareness)
                 </span>
               </li>
             </ul>
