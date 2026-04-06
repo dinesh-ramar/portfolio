@@ -41,7 +41,7 @@ export function Hero() {
             asChild
           >
             <a
-              href="/Dinesh_Ramar_Resume.pdf"
+              href="/Dinesh_Ramar_React_Frontend_Developer_4Yrs.pdf"
               download
               aria-label="Download resume PDF"
             >
