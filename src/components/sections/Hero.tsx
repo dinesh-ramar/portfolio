@@ -25,7 +25,7 @@ export function Hero() {
   }
 
   return (
-    <section className="container mx-auto px-4 py-20 md:py-32">
+    <section id="hero" className="container mx-auto px-4 py-20 md:py-32">
       <div className="mx-auto max-w-3xl text-center">
         <h1 className="font-heading text-heading-1 mb-4 font-bold tracking-tight">
           Frontend React.js Developer

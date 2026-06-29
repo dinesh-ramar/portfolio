@@ -5,6 +5,7 @@ import { About } from "@/components/sections/About"
 import { Skills } from "@/components/sections/Skills"
 import { Projects } from "@/components/sections/Projects"
 import { Experience } from "@/components/sections/Experience"
+import { Achievements } from "@/components/sections/Achievements"
 import { Values } from "@/components/sections/Values"
 import { Contact } from "@/components/sections/Contact"
 
@@ -18,6 +19,7 @@ function App() {
         <Skills />
         <Projects />
         <Experience />
+        <Achievements />
         <Values />
         <Contact />
       </main>
