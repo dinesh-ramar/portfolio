@@ -9,8 +9,9 @@ export function Contact() {
           Get In Touch
         </h2>
         <p className="text-body mb-8 text-muted-foreground">
-          I'm always open to discussing new opportunities and interesting
-          projects. Feel free to reach out!
+          Interested in building scalable, secure, and accessible React
+          applications together? I'm open to Frontend React opportunities,
+          freelance work, and enterprise projects.
         </p>
         <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
           <Button asChild variant="outline" size="lg" className="h-12 px-8">

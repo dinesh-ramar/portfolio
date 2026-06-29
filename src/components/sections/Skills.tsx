@@ -1,29 +1,17 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 
-const skillGroups = [
-  {
-    title: "Frontend",
-    skills: ["React", "TypeScript", "HTML5", "CSS3", "Tailwind CSS"],
-  },
-  {
-    title: "State & Data",
-    skills: ["Context API"],
-  },
-  {
-    title: "Quality & Best Practices",
-    skills: [
-      "Accessibility",
-      "Performance Optimization",
-      "Secure Coding Practices",
-      "ESLint",
-      "Prettier",
-    ],
-  },
-  {
-    title: "Tools",
-    skills: ["Git", "Vite", "npm"],
-  },
+interface SkillGroup {
+  title: string
+  skills: string[]
+}
+
+const SKILL_GROUPS: SkillGroup[] = [
+  { title: "Frontend", skills: ["React.js", "TypeScript", "JavaScript", "HTML5", "CSS3", "Tailwind CSS", "Bootstrap"] },
+  { title: "React Ecosystem", skills: ["Redux Toolkit", "React Query", "React Router", "Context API", "Custom Hooks", "React.memo"] },
+  { title: "Performance", skills: ["Lazy Loading", "Code Splitting", "Lighthouse", "Bundle Optimization"] },
+  { title: "Quality", skills: ["WCAG 2.1 AA", "VAPT", "Cross-browser Compatibility", "ESLint", "Prettier"] },
+  { title: "Tools", skills: ["Git", "GitHub", "Vite", "Webpack", "npm", "CI/CD"] },
 ]
 
 export function Skills() {
@@ -33,8 +21,8 @@ export function Skills() {
         <h2 className="font-heading text-heading-2 mb-12 text-center font-semibold">
           Skills
         </h2>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {skillGroups.map((group) => (
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+          {SKILL_GROUPS.map((group) => (
             <Card key={group.title}>
               <CardHeader>
                 <CardTitle className="text-heading-3">{group.title}</CardTitle>
@@ -55,4 +43,3 @@ export function Skills() {
     </section>
   )
 }
-

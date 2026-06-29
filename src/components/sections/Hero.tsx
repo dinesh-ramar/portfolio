@@ -1,6 +1,21 @@
 import { Button } from "@/components/ui/button"
 import { ArrowDown, Download } from "lucide-react"
 
+interface HighlightCard {
+  label: string
+}
+
+const HIGHLIGHT_CARDS: HighlightCard[] = [
+  { label: "4+ Years Experience" },
+  { label: "10+ React UI Modules Delivered" },
+  { label: "25% Bundle Size Reduction" },
+  { label: "90+ Lighthouse Accessibility" },
+  { label: "5+ Secure REST API Integrations" },
+  { label: "WCAG 2.1 AA" },
+  { label: "VAPT Remediation" },
+  { label: "Banking Domain Experience" },
+]
+
 export function Hero() {
   const scrollToProjects = () => {
     const projectsSection = document.getElementById("projects")
@@ -13,17 +28,26 @@ export function Hero() {
     <section className="container mx-auto px-4 py-20 md:py-32">
       <div className="mx-auto max-w-3xl text-center">
         <h1 className="font-heading text-heading-1 mb-4 font-bold tracking-tight">
-          Dinesh Ramar
+          Frontend React.js Developer
         </h1>
-        <p className="text-heading-2 mb-2 font-semibold text-muted-foreground">
-          Frontend Developer
+        <p className="text-heading-2 mb-6 font-semibold text-muted-foreground">
+          Building secure, scalable, and accessible React applications for enterprise and banking products.
         </p>
-        <p className="text-body mb-4 text-muted-foreground">
-          4 years of experience • Chennai, India
+        <p className="text-body mb-8 text-muted-foreground">
+          Frontend React.js Developer with 4+ years of experience building production-ready web applications using React.js, TypeScript, Redux Toolkit, React Query, and REST APIs. Specialized in accessibility, performance optimization, reusable component architecture, and security-first frontend development.
         </p>
-        <p className="text-heading-3 mb-12 font-semibold">
-          Building accessible, secure, and scalable React applications.
-        </p>
+        <div aria-label="Quick Highlights" className="mb-10">
+          <div className="flex flex-wrap gap-2 justify-center">
+            {HIGHLIGHT_CARDS.map((card) => (
+              <div
+                key={card.label}
+                className="rounded-lg border bg-card text-card-foreground px-3 py-2 text-sm font-medium"
+              >
+                {card.label}
+              </div>
+            ))}
+          </div>
+        </div>
         <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
           <Button
             onClick={scrollToProjects}
@@ -41,7 +65,7 @@ export function Hero() {
             asChild
           >
             <a
-              href="/Dinesh_Ramar_React_Frontend_Developer_4Yrs.pdf"
+              href="/Dinesh_Ramar_ReactJS_Resume.pdf"
               download
               aria-label="Download resume PDF"
             >
@@ -54,4 +78,3 @@ export function Hero() {
     </section>
   )
 }
-

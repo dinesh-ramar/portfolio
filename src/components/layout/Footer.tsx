@@ -7,6 +7,9 @@ export function Footer() {
         <p className="text-center text-sm text-muted-foreground">
           © {currentYear} Dinesh Ramar. All rights reserved.
         </p>
+        <p className="text-center text-sm text-muted-foreground mt-1">
+          Built with React + Vite + Tailwind CSS
+        </p>
       </div>
     </footer>
   )

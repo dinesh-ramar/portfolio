@@ -1,3 +1,46 @@
+interface SpecialisationItem {
+  title: string
+  description: string
+}
+
+const SPECIALISATIONS: SpecialisationItem[] = [
+  {
+    title: "Enterprise Banking Applications",
+    description:
+      "Delivered production-grade React interfaces for Ujjivan Small Finance Bank, handling customer banking workflows, secure REST API integration, and VAPT-compliant releases across multiple production deployments.",
+  },
+  {
+    title: "React Component Architecture",
+    description:
+      "Designed and built reusable, typed React component libraries adopted across three enterprise applications, enforcing consistent API contracts with TypeScript interfaces and custom hooks.",
+  },
+  {
+    title: "Performance Optimisation",
+    description:
+      "Reduced JavaScript bundle size by 25% through code splitting, lazy loading, and tree-shaking — measurably improving page load times on enterprise web applications.",
+  },
+  {
+    title: "WCAG 2.1 AA Accessibility",
+    description:
+      "Achieved Lighthouse Accessibility scores above 90 by implementing semantic HTML, ARIA attributes, keyboard navigation, and sufficient colour contrast across all UI components.",
+  },
+  {
+    title: "VAPT-Aware Secure Frontend",
+    description:
+      "Completed VAPT remediation before every production release, resolving all high-severity frontend vulnerabilities including XSS, insecure token storage, and improper input handling.",
+  },
+  {
+    title: "Agile Collaboration",
+    description:
+      "Contributed across full Agile sprint cycles — requirements refinement, sprint planning, daily stand-ups, code reviews, and retrospectives — within cross-functional banking and enterprise product teams.",
+  },
+  {
+    title: "Reusable Component Development",
+    description:
+      "Built 10+ production-ready React modules covering form handling, data tables, dashboards, and navigation patterns, cutting feature development time for subsequent projects.",
+  },
+]
+
 export function About() {
   return (
     <section id="about" className="container mx-auto px-4 py-16 md:py-24">
@@ -6,43 +49,26 @@ export function About() {
           About Me
         </h2>
         <p className="text-body mb-6 leading-relaxed">
-          Frontend Developer with 4 years of experience building enterprise and
-          production-ready web applications. Strong focus on clean UI
-          architecture, accessibility (WCAG 2.1 AA), performance optimization,
-          and security-aware frontend development (VAPT). Actively transitioning
-          to modern React-based frontend development.
+          Frontend React Developer with 4+ years of experience building
+          enterprise banking applications and production-ready web products.
+          Focused on React component architecture that scales — with
+          accessibility-first practices, TypeScript-enforced contracts, and
+          security-conscious development embedded throughout the delivery
+          process.
         </p>
         <ul className="space-y-3 text-body">
-          <li className="flex items-start">
-            <span className="mr-3 text-primary" aria-hidden="true">
-              •
-            </span>
-            <span>
-              <strong>React expertise:</strong> Building scalable component
-              architectures with modern React patterns and hooks
-            </span>
-          </li>
-          <li className="flex items-start">
-            <span className="mr-3 text-primary" aria-hidden="true">
-              •
-            </span>
-            <span>
-              <strong>Accessibility-first UI:</strong> Ensuring WCAG 2.1 AA
-              compliance and keyboard navigation support
-            </span>
-          </li>
-          <li className="flex items-start">
-            <span className="mr-3 text-primary" aria-hidden="true">
-              •
-            </span>
-            <span>
-              <strong>Security-aware frontend:</strong> Applying VAPT best
-              practices and secure frontend coding standards
-            </span>
-          </li>
+          {SPECIALISATIONS.map((item) => (
+            <li key={item.title} className="flex items-start">
+              <span className="mr-3 text-primary" aria-hidden="true">
+                •
+              </span>
+              <span>
+                <strong>{item.title}:</strong> {item.description}
+              </span>
+            </li>
+          ))}
         </ul>
       </div>
     </section>
   )
 }
-
