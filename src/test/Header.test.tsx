@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import * as fc from 'fast-check'
 import { Header } from '@/components/layout/Header'
@@ -6,27 +6,6 @@ import { Header } from '@/components/layout/Header'
 // Feature: portfolio-upgrade, Property 12: Header nav link integrity
 describe('Header', () => {
     const NAV_HREFS = ['#about', '#skills', '#projects', '#experience', '#contact']
-
-    beforeEach(() => {
-        // matchMedia is not implemented in jsdom — provide a minimal stub
-        Object.defineProperty(window, 'matchMedia', {
-            writable: true,
-            value: vi.fn().mockImplementation((query: string) => ({
-                matches: false,
-                media: query,
-                onchange: null,
-                addListener: vi.fn(),
-                removeListener: vi.fn(),
-                addEventListener: vi.fn(),
-                removeEventListener: vi.fn(),
-                dispatchEvent: vi.fn(),
-            })),
-        })
-    })
-
-    afterEach(() => {
-        vi.restoreAllMocks()
-    })
 
     // Feature: portfolio-upgrade, Property 12: Header nav link integrity
     // Validates: Requirements 9.1, 9.2, 9.4
@@ -89,19 +68,18 @@ describe('Header', () => {
             fc.property(fc.constant(null), () => {
                 const { unmount } = render(<Header />)
 
-                // ThemeToggle renders a button; aria-label contains "mode" or "theme" text
-                // The sr-only span inside it says "Toggle theme"
-                const toggleButton = screen.getByRole('button')
-                expect(toggleButton).toBeTruthy()
+                // ThemeToggle renders a button with aria-label referencing "mode" or "theme"
+                // Use getAllByRole since the Header now also contains a mobile menu button
+                const buttons = screen.getAllByRole('button')
+                expect(buttons.length).toBeGreaterThanOrEqual(1)
 
-                // The button has an aria-label referencing theme switching
-                const label = toggleButton.getAttribute('aria-label') ?? ''
-                const srText = toggleButton.querySelector('.sr-only')?.textContent ?? ''
-                const hasThemeLabel =
-                    /theme/i.test(label) ||
-                    /mode/i.test(label) ||
-                    /theme/i.test(srText)
-                expect(hasThemeLabel).toBe(true)
+                // Find the theme toggle specifically by its aria-label
+                const toggleButton = buttons.find((btn) => {
+                    const label = btn.getAttribute('aria-label') ?? ''
+                    const srText = btn.querySelector('.sr-only')?.textContent ?? ''
+                    return /theme/i.test(label) || /mode/i.test(label) || /theme/i.test(srText)
+                })
+                expect(toggleButton).toBeTruthy()
 
                 unmount()
             }),

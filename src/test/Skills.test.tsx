@@ -13,7 +13,7 @@ const ALL_SKILLS = [
     // React Ecosystem
     "Redux Toolkit", "React Query", "React Router", "Context API", "Custom Hooks", "React.memo",
     // Performance
-    "Lazy Loading", "Code Splitting", "Lighthouse", "Bundle Optimization",
+    "Lazy Loading", "Code Splitting", "Lighthouse", "Bundle Optimisation",
     // Quality
     "WCAG 2.1 AA", "VAPT", "Cross-browser Compatibility", "ESLint", "Prettier",
     // Tools

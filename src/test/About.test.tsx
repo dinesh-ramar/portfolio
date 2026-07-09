@@ -18,7 +18,6 @@ import { About } from '@/components/sections/About'
 const REQUIRED_KEYWORDS = [
     'enterprise banking',
     'React',
-    '25%',
     'WCAG 2.1 AA',
     'VAPT',
     'Agile',
@@ -44,6 +43,8 @@ const QUANTIFIED_PATTERNS = [
     /Lighthouse/,
     /Drupal/,
     /Ujjivan/,
+    /code splitting/i,
+    /lazy loading/i,
 ]
 
 describe('About – Property 3: content completeness', () => {

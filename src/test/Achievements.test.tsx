@@ -11,7 +11,7 @@ import { Achievements } from '@/components/sections/Achievements'
  * For any render of the Achievements component:
  * - Exactly six cards SHALL be present.
  * - Each card SHALL display both a metric value and a descriptive label.
- * - The six metric values SHALL be ["4+", "10+", "25%", "90+", "5+", "100%"]
+ * - The six metric values SHALL be ["4+", "10+", "25%", "90+", "7+", "100%"]
  *   with their corresponding labels.
  */
 
@@ -20,7 +20,7 @@ const ACHIEVEMENT_CARDS = [
     { metric: "10+", label: "React Modules" },
     { metric: "25%", label: "Bundle Reduction" },
     { metric: "90+", label: "Accessibility Score" },
-    { metric: "5+", label: "REST APIs" },
+    { metric: "7+", label: "REST APIs" },
     { metric: "100%", label: "VAPT Compliance" },
 ] as const
 

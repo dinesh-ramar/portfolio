@@ -10,7 +10,7 @@ describe('Hero', () => {
         "10+ React UI Modules Delivered",
         "25% Bundle Size Reduction",
         "90+ Lighthouse Accessibility",
-        "5+ Secure REST API Integrations",
+        "7+ Secure REST API Integrations",
         "WCAG 2.1 AA",
         "VAPT Remediation",
         "Banking Domain Experience",
