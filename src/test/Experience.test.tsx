@@ -13,7 +13,7 @@ import { Experience } from '@/components/sections/Experience'
  * - The bullet text SHALL begin with a past-tense action verb from the set:
  *   "Delivered", "Reduced", "Achieved", "Integrated", "Completed", "Built"
  * - The full set of bullets SHALL collectively cover all required topics:
- *   "10+", "25%", "90", "5+", "VAPT", "reusable"
+ *   "10+", "25%", "90", "7+", "VAPT", "reusable"
  */
 
 const VALID_OPENING_VERBS = [
@@ -29,7 +29,7 @@ const REQUIRED_COLLECTIVE_TERMS = [
     '10+',
     '25%',
     '90',
-    '5+',
+    '7+',
     'VAPT',
     'reusable',
 ] as const

@@ -1,5 +1,20 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Code, Shield, Zap, Accessibility } from "lucide-react"
+/**
+ * Values (Focus Areas) — enhanced with:
+ * - SpotlightCard + border glow on hover
+ * - Icon container scales + rotates slightly on card hover (< 10°)
+ * - Card lift translateY(-4px)
+ * - Staggered reveal
+ * - Improved typography and spacing
+ *
+ * ReactBits inspiration: Border Glow, Spotlight Card
+ */
+
+import { motion, useReducedMotion } from "framer-motion";
+import { Code, Shield, Zap, Accessibility } from "lucide-react";
+import { SpotlightCard } from "@/components/ui/spotlight-card";
+import { Reveal } from "@/components/ui/reveal";
+import { SectionHeading } from "@/components/ui/section-heading";
+import { cn } from "@/lib/utils";
 
 const values = [
   {
@@ -24,41 +39,82 @@ const values = [
     icon: Zap,
     title: "Performance & Scalability",
     description:
-      "Optimizing for fast load times, efficient rendering, and scalable architecture to handle growth.",
+      "Making sure the app stays fast and responsive as data and features grow.",
   },
-]
+];
+
+function ValueCard({
+  value,
+  index,
+}: {
+  value: (typeof values)[0];
+  index: number;
+}) {
+  const prefersReduced = useReducedMotion();
+  const Icon = value.icon;
+
+  return (
+    <motion.div
+      initial={prefersReduced ? {} : { opacity: 0, y: 14 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.35, ease: "easeOut", delay: index * 0.07 }}
+      whileHover={
+        prefersReduced
+          ? {}
+          : { y: -4, transition: { duration: 0.22, ease: "easeOut" } }
+      }
+      className="h-full"
+    >
+      <SpotlightCard className={cn("h-full card-base card-hover-glow")}>
+        <div className="p-6">
+          {/* Icon + title row */}
+          <div className="mb-4 flex items-center gap-4">
+            <motion.div
+              className="rounded-lg bg-primary/10 p-2.5"
+              whileHover={
+                prefersReduced
+                  ? {}
+                  : {
+                      scale: 1.1,
+                      rotate: 8,
+                      transition: { duration: 0.22, ease: "easeOut" },
+                    }
+              }
+            >
+              <Icon className="h-5 w-5 text-primary" aria-hidden="true" />
+            </motion.div>
+            <h3 className="font-heading text-heading-3 font-semibold">
+              {value.title}
+            </h3>
+          </div>
+
+          {/* Description */}
+          <p className="text-body text-muted-foreground leading-relaxed">
+            {value.description}
+          </p>
+        </div>
+      </SpotlightCard>
+    </motion.div>
+  );
+}
 
 export function Values() {
   return (
-    <section id="values" className="container mx-auto px-4 py-16 md:py-24">
-      <div className="mx-auto max-w-6xl">
-        <h2 className="font-heading text-heading-2 mb-12 text-center font-semibold">
-          Focus Areas
-        </h2>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-          {values.map((value) => {
-            const Icon = value.icon
-            return (
-              <Card key={value.title}>
-                <CardHeader>
-                  <div className="mb-4 flex items-center gap-4">
-                    <div className="rounded-lg bg-primary/10 p-2">
-                      <Icon className="h-6 w-6 text-primary" aria-hidden="true" />
-                    </div>
-                    <CardTitle className="text-heading-3">{value.title}</CardTitle>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-body text-muted-foreground">
-                    {value.description}
-                  </p>
-                </CardContent>
-              </Card>
-            )
-          })}
+    <section id="values" className="w-full overflow-hidden">
+      <div className="container mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-24">
+        <div className="mx-auto max-w-6xl">
+          <Reveal>
+            <SectionHeading>Focus Areas</SectionHeading>
+          </Reveal>
+
+          <div className="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2">
+            {values.map((value, i) => (
+              <ValueCard key={value.title} value={value} index={i} />
+            ))}
+          </div>
         </div>
       </div>
     </section>
-  )
+  );
 }
-

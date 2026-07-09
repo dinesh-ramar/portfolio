@@ -11,9 +11,9 @@ import { Contact } from "@/components/sections/Contact"
 
 function App() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden w-full">
       <Header />
-      <main id="main">
+      <main id="main" className="pt-16">
         <Hero />
         <About />
         <Skills />
