@@ -9,7 +9,7 @@ interface SkillGroup {
 const SKILL_GROUPS: SkillGroup[] = [
   { title: "Frontend", skills: ["React.js", "TypeScript", "JavaScript", "HTML5", "CSS3", "Tailwind CSS", "Bootstrap"] },
   { title: "React Ecosystem", skills: ["Redux Toolkit", "React Query", "React Router", "Context API", "Custom Hooks", "React.memo"] },
-  { title: "Performance", skills: ["Lazy Loading", "Code Splitting", "Lighthouse", "Bundle Optimization"] },
+  { title: "Performance", skills: ["Lazy Loading", "Code Splitting", "Lighthouse", "Bundle Optimisation"] },
   { title: "Quality", skills: ["WCAG 2.1 AA", "VAPT", "Cross-browser Compatibility", "ESLint", "Prettier"] },
   { title: "Tools", skills: ["Git", "GitHub", "Vite", "Webpack", "npm", "CI/CD"] },
 ]
@@ -39,6 +39,9 @@ export function Skills() {
             </Card>
           ))}
         </div>
+        <p className="mt-8 text-center text-body text-muted-foreground">
+          <span className="font-semibold">Currently Learning:</span> Next.js, Jest, React Testing Library
+        </p>
       </div>
     </section>
   )

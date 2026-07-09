@@ -10,7 +10,7 @@ const HIGHLIGHT_CARDS: HighlightCard[] = [
   { label: "10+ React UI Modules Delivered" },
   { label: "25% Bundle Size Reduction" },
   { label: "90+ Lighthouse Accessibility" },
-  { label: "5+ Secure REST API Integrations" },
+  { label: "7+ Secure REST API Integrations" },
   { label: "WCAG 2.1 AA" },
   { label: "VAPT Remediation" },
   { label: "Banking Domain Experience" },
@@ -34,7 +34,7 @@ export function Hero() {
           Building secure, scalable, and accessible React applications for enterprise and banking products.
         </p>
         <p className="text-body mb-8 text-muted-foreground">
-          Frontend React.js Developer with 4+ years of experience building production-ready web applications using React.js, TypeScript, Redux Toolkit, React Query, and REST APIs. Specialized in accessibility, performance optimization, reusable component architecture, and security-first frontend development.
+          Frontend React.js Developer with 4+ years of experience building production-ready web applications using React.js, TypeScript, Redux Toolkit, React Query, and REST APIs. Specialised in accessibility, performance optimisation, reusable component architecture, and security-first frontend development.
         </p>
         <div aria-label="Quick Highlights" className="mb-10">
           <div className="flex flex-wrap gap-2 justify-center">

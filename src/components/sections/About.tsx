@@ -12,12 +12,12 @@ const SPECIALISATIONS: SpecialisationItem[] = [
   {
     title: "React Component Architecture",
     description:
-      "Designed and built reusable, typed React component libraries adopted across three enterprise applications, enforcing consistent API contracts with TypeScript interfaces and custom hooks.",
+      "Designed and built shared, typed React component libraries adopted across three enterprise applications, enforcing consistent API contracts with TypeScript interfaces and custom hooks.",
   },
   {
     title: "Performance Optimisation",
     description:
-      "Reduced JavaScript bundle size by 25% through code splitting, lazy loading, and tree-shaking — measurably improving page load times on enterprise web applications.",
+      "Applied code splitting, lazy loading, and tree-shaking to measurably improve page load times on enterprise web applications.",
   },
   {
     title: "WCAG 2.1 AA Accessibility",

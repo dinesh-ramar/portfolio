@@ -10,7 +10,7 @@ const ACHIEVEMENT_CARDS: AchievementCard[] = [
     { metric: "10+", label: "React Modules" },
     { metric: "25%", label: "Bundle Reduction" },
     { metric: "90+", label: "Accessibility Score" },
-    { metric: "5+", label: "REST APIs" },
+    { metric: "7+", label: "REST APIs" },
     { metric: "100%", label: "VAPT Compliance" },
 ]
 

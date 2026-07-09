@@ -24,7 +24,7 @@ const values = [
     icon: Zap,
     title: "Performance & Scalability",
     description:
-      "Optimizing for fast load times, efficient rendering, and scalable architecture to handle growth.",
+      "Making sure the app stays fast and responsive as data and features grow.",
   },
 ]
 
