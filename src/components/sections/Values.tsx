@@ -90,20 +90,22 @@ function ValueCard({ value, index }: { value: typeof values[0]; index: number })
 
 export function Values() {
   return (
-    <section id="values" className="container mx-auto px-4 py-16 md:py-24">
-      <div className="mx-auto max-w-6xl">
-        <Reveal>
-          <div className="mb-12 flex items-center justify-center gap-3">
-            <div className="h-px w-16 bg-gradient-to-r from-transparent to-primary/40" aria-hidden="true" />
-            <h2 className="font-heading text-heading-2 font-semibold text-center">Focus Areas</h2>
-            <div className="h-px w-16 bg-gradient-to-l from-transparent to-primary/40" aria-hidden="true" />
-          </div>
-        </Reveal>
+    <section id="values" className="w-full overflow-hidden">
+      <div className="container mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-24">
+        <div className="mx-auto max-w-6xl">
+          <Reveal>
+            <div className="mb-10 sm:mb-12 flex items-center justify-center gap-3">
+              <div className="h-px w-16 bg-gradient-to-r from-transparent to-primary/40" aria-hidden="true" />
+              <h2 className="font-heading text-heading-2 font-semibold text-center">Focus Areas</h2>
+              <div className="h-px w-16 bg-gradient-to-l from-transparent to-primary/40" aria-hidden="true" />
+            </div>
+          </Reveal>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-          {values.map((value, i) => (
-            <ValueCard key={value.title} value={value} index={i} />
-          ))}
+          <div className="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2">
+            {values.map((value, i) => (
+              <ValueCard key={value.title} value={value} index={i} />
+            ))}
+          </div>
         </div>
       </div>
     </section>

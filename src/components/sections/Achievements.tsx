@@ -44,7 +44,7 @@ function AchievementItem({ card, index }: { card: AchievementCard; index: number
         >
             <SpotlightCard
                 className={cn(
-                    "flex flex-col items-center justify-center p-6 text-center border",
+                    "flex flex-col items-center justify-center p-4 sm:p-6 text-center border",
                     "bg-card border-border/60 shadow-sm",
                     "transition-[border-color,box-shadow] duration-300",
                     "hover:border-primary/40 hover:shadow-[0_4px_24px_hsl(173_58%_39%_/_0.12)]"
@@ -64,20 +64,22 @@ function AchievementItem({ card, index }: { card: AchievementCard; index: number
 
 export function Achievements() {
     return (
-        <section id="achievements" className="container mx-auto px-4 py-16 md:py-24">
-            <div className="mx-auto max-w-4xl">
-                <Reveal>
-                    <div className="mb-12 flex items-center justify-center gap-3">
-                        <div className="h-px w-16 bg-gradient-to-r from-transparent to-primary/40" aria-hidden="true" />
-                        <h2 className="font-heading text-heading-2 font-semibold text-center">Key Achievements</h2>
-                        <div className="h-px w-16 bg-gradient-to-l from-transparent to-primary/40" aria-hidden="true" />
-                    </div>
-                </Reveal>
+        <section id="achievements" className="w-full overflow-hidden">
+            <div className="container mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-24">
+                <div className="mx-auto max-w-4xl">
+                    <Reveal>
+                        <div className="mb-10 sm:mb-12 flex items-center justify-center gap-3">
+                            <div className="h-px w-16 bg-gradient-to-r from-transparent to-primary/40" aria-hidden="true" />
+                            <h2 className="font-heading text-heading-2 font-semibold text-center">Key Achievements</h2>
+                            <div className="h-px w-16 bg-gradient-to-l from-transparent to-primary/40" aria-hidden="true" />
+                        </div>
+                    </Reveal>
 
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-                    {ACHIEVEMENT_CARDS.map((card, i) => (
-                        <AchievementItem key={card.label} card={card} index={i} />
-                    ))}
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-6">
+                        {ACHIEVEMENT_CARDS.map((card, i) => (
+                            <AchievementItem key={card.label} card={card} index={i} />
+                        ))}
+                    </div>
                 </div>
             </div>
         </section>

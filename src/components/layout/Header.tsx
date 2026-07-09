@@ -98,7 +98,7 @@ export function Header() {
         {...navAnimation}
         className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/90 backdrop-blur-md supports-[backdrop-filter]:bg-background/75"
       >
-        <div className="container flex h-16 items-center px-4">
+        <div className="container flex h-16 items-center px-4 sm:px-6">
           {/* Skip link */}
           <a
             href="#main"
@@ -198,7 +198,7 @@ export function Header() {
               exit={prefersReduced ? { opacity: 0 } : { x: "100%" }}
               transition={{ duration: 0.28, ease: "easeOut" }}
               className={cn(
-                "fixed right-0 top-0 z-50 h-full w-72",
+                "fixed right-0 top-0 z-50 h-full w-[min(288px,85vw)]",
                 "flex flex-col bg-background border-l border-border shadow-xl md:hidden"
               )}
             >

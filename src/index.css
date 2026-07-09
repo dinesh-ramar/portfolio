@@ -48,6 +48,9 @@
 
   html {
     scroll-behavior: smooth;
+    /* Prevent horizontal overflow at the document level */
+    overflow-x: hidden;
+    max-width: 100%;
   }
 
   body {
@@ -57,6 +60,9 @@
     line-height: 1.5;
     /* Prevent layout shift from scrollbar appearing/disappearing */
     scrollbar-gutter: stable;
+    /* Ensure no horizontal overflow leaks through */
+    overflow-x: hidden;
+    max-width: 100%;
   }
 
   h1,

@@ -167,13 +167,13 @@ function TiltCard({ card, index }: { card: ProjectCard; index: number }) {
           )}
         >
           {/* Card header */}
-          <div className="p-6 pb-4">
+          <div className="p-4 sm:p-6 pb-3 sm:pb-4">
             <h3 className="font-heading text-heading-3 font-semibold mb-1">{card.title}</h3>
             <p className="text-sm font-medium text-primary">{card.role}</p>
           </div>
 
           {/* Card body */}
-          <div className="flex flex-1 flex-col gap-4 p-6 pt-0">
+          <div className="flex flex-1 flex-col gap-3 sm:gap-4 p-4 sm:p-6 pt-0">
             {/* Overview */}
             <p className="text-body text-muted-foreground leading-relaxed">{card.overview}</p>
 
@@ -229,7 +229,7 @@ function TiltCard({ card, index }: { card: ProjectCard; index: number }) {
 
           {/* Links footer */}
           {(card.demoUrl || card.githubUrl) && (
-            <div className="flex gap-3 p-6 pt-0">
+            <div className="flex flex-wrap gap-2 sm:gap-3 p-4 sm:p-6 pt-0">
               {card.demoUrl && (
                 <AnimatedLinkButton
                   href={card.demoUrl}
@@ -318,20 +318,22 @@ function GithubAnimated() {
 
 export function Projects() {
   return (
-    <section id="projects" className="container mx-auto px-4 py-16 md:py-24">
-      <div className="mx-auto max-w-5xl">
-        <Reveal>
-          <div className="mb-12 flex items-center justify-center gap-3">
-            <div className="h-px w-16 bg-gradient-to-r from-transparent to-primary/40" aria-hidden="true" />
-            <h2 className="font-heading text-heading-2 font-semibold text-center">Projects</h2>
-            <div className="h-px w-16 bg-gradient-to-l from-transparent to-primary/40" aria-hidden="true" />
-          </div>
-        </Reveal>
+    <section id="projects" className="w-full overflow-hidden">
+      <div className="container mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-24">
+        <div className="mx-auto max-w-5xl">
+          <Reveal>
+            <div className="mb-12 flex items-center justify-center gap-3">
+              <div className="h-px w-16 bg-gradient-to-r from-transparent to-primary/40" aria-hidden="true" />
+              <h2 className="font-heading text-heading-2 font-semibold text-center">Projects</h2>
+              <div className="h-px w-16 bg-gradient-to-l from-transparent to-primary/40" aria-hidden="true" />
+            </div>
+          </Reveal>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-          {PROJECTS.map((card, i) => (
-            <TiltCard key={card.id} card={card} index={i} />
-          ))}
+          <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2">
+            {PROJECTS.map((card, i) => (
+              <TiltCard key={card.id} card={card} index={i} />
+            ))}
+          </div>
         </div>
       </div>
     </section>

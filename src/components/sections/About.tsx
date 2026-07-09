@@ -78,7 +78,7 @@ function SpecialisationCard({ item, index }: { item: SpecialisationItem; index: 
         )}
       </div>
 
-      <div className="min-w-0">
+      <div className="min-w-0 text-sm sm:text-body leading-relaxed">
         <strong className="font-semibold text-foreground">{item.title}:</strong>{" "}
         <span className="text-muted-foreground">{item.description}</span>
       </div>
@@ -88,30 +88,32 @@ function SpecialisationCard({ item, index }: { item: SpecialisationItem; index: 
 
 export function About() {
   return (
-    <section id="about" className="container mx-auto px-4 py-16 md:py-24">
-      <div className="mx-auto max-w-3xl">
-        <Reveal>
-          <div className="mb-8 flex items-center gap-3">
-            <h2 className="font-heading text-heading-2 font-semibold">About Me</h2>
-            {/* Accent underline */}
-            <div className="h-px flex-1 bg-gradient-to-r from-primary/40 to-transparent" aria-hidden="true" />
-          </div>
-        </Reveal>
+    <section id="about" className="w-full overflow-hidden">
+      <div className="container mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-24">
+        <div className="mx-auto max-w-3xl">
+          <Reveal>
+            <div className="mb-8 flex items-center gap-3">
+              <h2 className="font-heading text-heading-2 font-semibold">About Me</h2>
+              {/* Accent underline */}
+              <div className="h-px flex-1 bg-gradient-to-r from-primary/40 to-transparent" aria-hidden="true" />
+            </div>
+          </Reveal>
 
-        <Reveal delay={0.05}>
-          <p className="text-body mb-8 leading-relaxed text-muted-foreground">
-            Frontend React Developer with 4+ years of experience building enterprise banking
-            applications and production-ready web products. Focused on React component architecture
-            that scales — with accessibility-first practices, TypeScript-enforced contracts, and
-            security-conscious development embedded throughout the delivery process.
-          </p>
-        </Reveal>
+          <Reveal delay={0.05}>
+            <p className="text-body mb-8 leading-relaxed text-muted-foreground">
+              Frontend React Developer with 4+ years of experience building enterprise banking
+              applications and production-ready web products. Focused on React component architecture
+              that scales — with accessibility-first practices, TypeScript-enforced contracts, and
+              security-conscious development embedded throughout the delivery process.
+            </p>
+          </Reveal>
 
-        <ul className="space-y-1" aria-label="Specialisations">
-          {SPECIALISATIONS.map((item, i) => (
-            <SpecialisationCard key={item.title} item={item} index={i} />
-          ))}
-        </ul>
+          <ul className="space-y-1" aria-label="Specialisations">
+            {SPECIALISATIONS.map((item, i) => (
+              <SpecialisationCard key={item.title} item={item} index={i} />
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   )

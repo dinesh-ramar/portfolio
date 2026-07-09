@@ -84,28 +84,30 @@ function SkillCard({ group, index }: { group: SkillGroup; index: number }) {
 
 export function Skills() {
   return (
-    <section id="skills" className="container mx-auto px-4 py-16 md:py-24">
-      <div className="mx-auto max-w-6xl">
-        <Reveal>
-          <div className="mb-12 flex items-center justify-center gap-3">
-            <div className="h-px w-16 bg-gradient-to-r from-transparent to-primary/40" aria-hidden="true" />
-            <h2 className="font-heading text-heading-2 font-semibold text-center">Skills</h2>
-            <div className="h-px w-16 bg-gradient-to-l from-transparent to-primary/40" aria-hidden="true" />
+    <section id="skills" className="w-full overflow-hidden">
+      <div className="container mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-24">
+        <div className="mx-auto max-w-6xl">
+          <Reveal>
+            <div className="mb-12 flex items-center justify-center gap-3">
+              <div className="h-px w-16 bg-gradient-to-r from-transparent to-primary/40" aria-hidden="true" />
+              <h2 className="font-heading text-heading-2 font-semibold text-center">Skills</h2>
+              <div className="h-px w-16 bg-gradient-to-l from-transparent to-primary/40" aria-hidden="true" />
+            </div>
+          </Reveal>
+
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 sm:gap-6">
+            {SKILL_GROUPS.map((group, i) => (
+              <SkillCard key={group.title} group={group} index={i} />
+            ))}
           </div>
-        </Reveal>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-          {SKILL_GROUPS.map((group, i) => (
-            <SkillCard key={group.title} group={group} index={i} />
-          ))}
+          <Reveal delay={0.2}>
+            <p className="mt-8 text-center text-sm sm:text-body text-muted-foreground">
+              <span className="font-semibold text-foreground">Currently Learning:</span>{" "}
+              Next.js, Jest, React Testing Library
+            </p>
+          </Reveal>
         </div>
-
-        <Reveal delay={0.2}>
-          <p className="mt-8 text-center text-body text-muted-foreground">
-            <span className="font-semibold text-foreground">Currently Learning:</span>{" "}
-            Next.js, Jest, React Testing Library
-          </p>
-        </Reveal>
       </div>
     </section>
   )
