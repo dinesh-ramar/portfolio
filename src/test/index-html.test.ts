@@ -52,14 +52,10 @@ describe('index.html', () => {
         expect(html).toMatch(/<meta\s[^>]*name="viewport"[^>]*>/)
     })
 
-    it('11.5 preserves Google Fonts preconnect link for fonts.googleapis.com', () => {
-        expect(html).toContain('https://fonts.googleapis.com')
-        expect(html).toMatch(/<link\s[^>]*rel="preconnect"[^>]*fonts\.googleapis\.com[^>]*>/)
-    })
-
-    it('11.5 preserves Google Fonts preconnect link for fonts.gstatic.com', () => {
-        expect(html).toContain('https://fonts.gstatic.com')
-        expect(html).toMatch(/<link\s[^>]*rel="preconnect"[^>]*fonts\.gstatic\.com[^>]*>/)
+    it('11.5 does not include remote font links after switching to local fonts', () => {
+        expect(html).not.toMatch(/<link\s[^>]*rel="preconnect"[^>]*>/)
+        expect(html).not.toMatch(/<link\s[^>]*rel="stylesheet"[^>]*>/)
+        expect(html).not.toMatch(/https:\/\/fonts\.[^"']+/)
     })
 
     it('11.5 preserves FOUC-prevention inline script checking localStorage theme', () => {

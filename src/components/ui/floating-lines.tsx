@@ -52,7 +52,7 @@ export function FloatingLines({ className, count = 5 }: FloatingLinesProps) {
                         left: line.left,
                         opacity: line.opacity,
                         background:
-                            "linear-gradient(90deg, transparent, hsl(173 58% 39%), transparent)",
+                            "linear-gradient(90deg, transparent, var(--glow-floating-line), transparent)",
                         filter: "blur(0.5px)",
                         animation: `floatLine ${line.duration} ease-in-out infinite`,
                         animationDelay: line.delay,

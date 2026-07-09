@@ -53,7 +53,7 @@ export function Hero() {
         className="pointer-events-none absolute left-1/2 top-1/3 -translate-x-1/2 -translate-y-1/2 h-[min(420px,80vw)] w-[min(420px,80vw)] rounded-full"
         style={{
           background:
-            "radial-gradient(circle, hsl(173 58% 39% / 0.07) 0%, transparent 70%)",
+            "radial-gradient(circle, var(--glow-radial-subtle) 0%, transparent 70%)",
           filter: "blur(40px)",
         }}
       />
@@ -125,7 +125,7 @@ export function Hero() {
               <Button
                 onClick={scrollToProjects}
                 size="lg"
-                className="w-full sm:w-auto h-12 px-6 sm:px-8 transition-transform duration-250 hover:scale-[1.02] active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                className="w-full sm:w-auto h-12 px-6 sm:px-8 transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                 aria-label="View my projects"
               >
                 View Projects
@@ -137,7 +137,7 @@ export function Hero() {
               <Button
                 variant="outline"
                 size="lg"
-                className="w-full sm:w-auto h-12 px-6 sm:px-8 transition-transform duration-250 hover:scale-[1.02] active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                className="w-full sm:w-auto h-12 px-6 sm:px-8 transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                 asChild
               >
                 <a

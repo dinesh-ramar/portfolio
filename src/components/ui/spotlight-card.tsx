@@ -20,7 +20,7 @@ interface SpotlightCardProps {
 export function SpotlightCard({
     children,
     className,
-    spotlightColor = "hsl(173 58% 39% / 0.08)",
+    spotlightColor = "var(--glow-spotlight)",
 }: SpotlightCardProps) {
     const cardRef = useRef<HTMLDivElement>(null)
 

@@ -18,6 +18,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { SpotlightCard } from "@/components/ui/spotlight-card"
 import { Reveal } from "@/components/ui/reveal"
+import { SectionHeading } from "@/components/ui/section-heading"
 import { cn } from "@/lib/utils"
 
 interface ProjectMetric {
@@ -147,8 +148,8 @@ function TiltCard({ card, index }: { card: ProjectCard; index: number }) {
     <motion.div
       initial={prefersReduced ? {} : { opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.4, ease: "easeOut", delay: index * 0.08 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.35, ease: "easeOut", delay: index * 0.07 }}
       className="h-full"
     >
       <div
@@ -161,9 +162,8 @@ function TiltCard({ card, index }: { card: ProjectCard; index: number }) {
       >
         <SpotlightCard
           className={cn(
-            "h-full flex flex-col rounded-lg border bg-card text-card-foreground shadow-sm",
-            "border-border/60 transition-[border-color,box-shadow] duration-300",
-            "hover:border-primary/40 hover:shadow-[0_8px_32px_hsl(173_58%_39%_/_0.12)]"
+            "h-full flex flex-col card-base",
+            "hover:border-primary/40 hover:shadow-[var(--glow-strong)]"
           )}
         >
           {/* Card header */}
@@ -276,7 +276,7 @@ function AnimatedLinkButton({
       variant={variant}
       size="sm"
       className={cn(
-        "transition-transform duration-200 hover:scale-[1.03] active:scale-[0.97]",
+        "transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98]",
         "focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1"
       )}
     >
@@ -322,11 +322,7 @@ export function Projects() {
       <div className="container mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-24">
         <div className="mx-auto max-w-5xl">
           <Reveal>
-            <div className="mb-12 flex items-center justify-center gap-3">
-              <div className="h-px w-16 bg-gradient-to-r from-transparent to-primary/40" aria-hidden="true" />
-              <h2 className="font-heading text-heading-2 font-semibold text-center">Projects</h2>
-              <div className="h-px w-16 bg-gradient-to-l from-transparent to-primary/40" aria-hidden="true" />
-            </div>
+            <SectionHeading>Projects</SectionHeading>
           </Reveal>
 
           <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2">
