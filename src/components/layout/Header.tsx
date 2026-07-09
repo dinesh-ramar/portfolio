@@ -94,11 +94,11 @@ export function Header() {
 
   return (
     <>
-      <motion.header
-        {...navAnimation}
-        className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/90 backdrop-blur-md supports-[backdrop-filter]:bg-background/75"
-      >
-        <div className="container flex h-16 items-center px-4 sm:px-6">
+      <header className="fixed top-0 inset-x-0 z-50 w-full border-b border-border/60 bg-background/90 backdrop-blur-md supports-[backdrop-filter]:bg-background/75">
+        <motion.div
+          {...navAnimation}
+          className="container flex h-16 items-center px-4 sm:px-6"
+        >
           {/* Skip link */}
           <a
             href="#main"
@@ -168,8 +168,8 @@ export function Header() {
               )}
             </button>
           </div>
-        </div>
-      </motion.header>
+        </motion.div>
+      </header>
 
       {/* Mobile drawer overlay */}
       <AnimatePresence>
@@ -245,7 +245,7 @@ export function Header() {
         )}
       </AnimatePresence>
 
-      {/* No spacer needed — sticky positioning keeps the header in flow */}
+      {/* Spacer is handled via pt-16 on <main> in App.tsx */}
     </>
   )
 }
