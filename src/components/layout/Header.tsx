@@ -7,16 +7,16 @@
  * - All transitions respect prefers-reduced-motion
  */
 
-import { useEffect, useState } from "react"
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion"
-import { Menu, X } from "lucide-react"
-import { ThemeToggle } from "@/components/ui/theme-toggle"
-import { cn } from "@/lib/utils"
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { Menu, X } from "lucide-react";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { cn } from "@/lib/utils";
 
 interface NavLink {
-  label: string
-  href: string
-  sectionId: string
+  label: string;
+  href: string;
+  sectionId: string;
 }
 
 const NAV_LINKS: NavLink[] = [
@@ -25,27 +25,27 @@ const NAV_LINKS: NavLink[] = [
   { label: "Projects", href: "#projects", sectionId: "projects" },
   { label: "Experience", href: "#experience", sectionId: "experience" },
   { label: "Contact", href: "#contact", sectionId: "contact" },
-]
+];
 
 export function Header() {
-  const [activeSection, setActiveSection] = useState<string>("")
-  const [mobileOpen, setMobileOpen] = useState(false)
-  const prefersReduced = useReducedMotion()
+  const [activeSection, setActiveSection] = useState<string>("");
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const prefersReduced = useReducedMotion();
 
   // Active section tracking — fires when a section's top edge crosses 25% down
   // the viewport. Uses a single observer with rootMargin instead of threshold
   // so tall sections (Projects, Experience) are never skipped.
   useEffect(() => {
-    const sectionIds = NAV_LINKS.map((l) => l.sectionId)
+    const sectionIds = NAV_LINKS.map((l) => l.sectionId);
 
     // Map each section element to its id for fast lookup in the callback
-    const sectionMap = new Map<Element, string>()
+    const sectionMap = new Map<Element, string>();
     sectionIds.forEach((id) => {
-      const el = document.getElementById(id)
-      if (el) sectionMap.set(el, id)
-    })
+      const el = document.getElementById(id);
+      if (el) sectionMap.set(el, id);
+    });
 
-    if (sectionMap.size === 0) return
+    if (sectionMap.size === 0) return;
 
     // rootMargin: top edge must be within the top 25% of the viewport.
     // "0px 0px -75% 0px" means the bottom 75% of the viewport is outside
@@ -54,43 +54,45 @@ export function Header() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const id = sectionMap.get(entry.target)
-            if (id) setActiveSection(id)
+            const id = sectionMap.get(entry.target);
+            if (id) setActiveSection(id);
           }
-        })
+        });
       },
       {
         rootMargin: "0px 0px -75% 0px",
         threshold: 0,
-      }
-    )
+      },
+    );
 
-    sectionMap.forEach((_, el) => observer.observe(el))
-    return () => observer.disconnect()
-  }, [])
+    sectionMap.forEach((_, el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
 
   // Close mobile drawer on Escape
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setMobileOpen(false)
-    }
-    document.addEventListener("keydown", handler)
-    return () => document.removeEventListener("keydown", handler)
-  }, [])
+      if (e.key === "Escape") setMobileOpen(false);
+    };
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, []);
 
   // Prevent body scroll when mobile drawer is open
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? "hidden" : ""
-    return () => { document.body.style.overflow = "" }
-  }, [mobileOpen])
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
 
   const navAnimation = prefersReduced
     ? {}
     : {
-      initial: { y: -64, opacity: 0 },
-      animate: { y: 0, opacity: 1 },
-      transition: { duration: 0.3, ease: "easeOut" },
-    }
+        initial: { y: -64, opacity: 0 },
+        animate: { y: 0, opacity: 1 },
+        transition: { duration: 0.3, ease: "easeOut" },
+      };
 
   return (
     <>
@@ -113,7 +115,7 @@ export function Header() {
             className="hidden md:flex items-center gap-1 rounded-full border border-border/50 bg-muted/40 px-2 py-0.5"
           >
             {NAV_LINKS.map((link) => {
-              const isActive = activeSection === link.sectionId
+              const isActive = activeSection === link.sectionId;
               return (
                 <a
                   key={link.href}
@@ -122,10 +124,10 @@ export function Header() {
                   onClick={() => setActiveSection(link.sectionId)}
                   className={cn(
                     "relative inline-flex items-center px-4 py-1.5 text-sm font-medium rounded-full transition-colors duration-200 leading-none",
-                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1",
+                    "focus-visible-ring focus-visible:ring-primary focus-visible:ring-offset-1",
                     isActive
                       ? "text-primary-foreground"
-                      : "text-muted-foreground hover:text-foreground"
+                      : "text-muted-foreground hover:text-foreground",
                   )}
                 >
                   {/* Animated active pill */}
@@ -143,7 +145,7 @@ export function Header() {
                   )}
                   {link.label}
                 </a>
-              )
+              );
             })}
           </nav>
 
@@ -152,13 +154,15 @@ export function Header() {
             {/* Mobile menu button */}
             <button
               onClick={() => setMobileOpen((o) => !o)}
-              aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-label={
+                mobileOpen ? "Close navigation menu" : "Open navigation menu"
+              }
               aria-expanded={mobileOpen}
               aria-controls="mobile-nav"
               className={cn(
                 "md:hidden inline-flex h-10 w-10 items-center justify-center rounded-md",
                 "text-muted-foreground hover:text-foreground hover:bg-muted",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary transition-colors"
+                "focus-visible-ring transition-colors",
               )}
             >
               {mobileOpen ? (
@@ -199,28 +203,34 @@ export function Header() {
               transition={{ duration: 0.28, ease: "easeOut" }}
               className={cn(
                 "fixed right-0 top-0 z-50 h-full w-[min(288px,85vw)]",
-                "flex flex-col bg-background border-l border-border shadow-xl md:hidden"
+                "flex flex-col bg-background border-l border-border shadow-xl md:hidden",
               )}
             >
               <div className="flex items-center justify-between p-4 border-b border-border">
-                <span className="font-semibold text-sm text-foreground">Navigation</span>
+                <span className="font-semibold text-sm text-foreground">
+                  Navigation
+                </span>
                 <button
                   onClick={() => setMobileOpen(false)}
                   aria-label="Close navigation menu"
-                  className="inline-flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground hover:text-foreground hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                  className="inline-flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground hover:text-foreground hover:bg-muted focus-visible-ring"
                 >
                   <X className="h-4 w-4" aria-hidden="true" />
                 </button>
               </div>
               <ul className="flex flex-col gap-1 p-4" role="list">
                 {NAV_LINKS.map((link, i) => {
-                  const isActive = activeSection === link.sectionId
+                  const isActive = activeSection === link.sectionId;
                   return (
                     <motion.li
                       key={link.href}
                       initial={prefersReduced ? {} : { opacity: 0, x: 12 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: i * 0.05, duration: 0.25, ease: "easeOut" }}
+                      transition={{
+                        delay: i * 0.05,
+                        duration: 0.25,
+                        ease: "easeOut",
+                      }}
                     >
                       <a
                         href={link.href}
@@ -228,16 +238,16 @@ export function Header() {
                         onClick={() => setMobileOpen(false)}
                         className={cn(
                           "block w-full rounded-md px-4 py-3 text-sm font-medium transition-colors",
-                          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
+                          "focus-visible-ring",
                           isActive
                             ? "bg-primary text-primary-foreground"
-                            : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                            : "text-muted-foreground hover:text-foreground hover:bg-muted",
                         )}
                       >
                         {link.label}
                       </a>
                     </motion.li>
-                  )
+                  );
                 })}
               </ul>
             </motion.nav>
@@ -247,5 +257,5 @@ export function Header() {
 
       {/* Spacer is handled via pt-16 on <main> in App.tsx */}
     </>
-  )
+  );
 }

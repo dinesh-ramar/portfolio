@@ -9,11 +9,12 @@
  * ReactBits inspiration: Border Glow, Spotlight Card
  */
 
-import { motion, useReducedMotion } from "framer-motion"
-import { Code, Shield, Zap, Accessibility } from "lucide-react"
-import { SpotlightCard } from "@/components/ui/spotlight-card"
-import { Reveal } from "@/components/ui/reveal"
-import { cn } from "@/lib/utils"
+import { motion, useReducedMotion } from "framer-motion";
+import { Code, Shield, Zap, Accessibility } from "lucide-react";
+import { SpotlightCard } from "@/components/ui/spotlight-card";
+import { Reveal } from "@/components/ui/reveal";
+import { SectionHeading } from "@/components/ui/section-heading";
+import { cn } from "@/lib/utils";
 
 const values = [
   {
@@ -40,28 +41,32 @@ const values = [
     description:
       "Making sure the app stays fast and responsive as data and features grow.",
   },
-]
+];
 
-function ValueCard({ value, index }: { value: typeof values[0]; index: number }) {
-  const prefersReduced = useReducedMotion()
-  const Icon = value.icon
+function ValueCard({
+  value,
+  index,
+}: {
+  value: (typeof values)[0];
+  index: number;
+}) {
+  const prefersReduced = useReducedMotion();
+  const Icon = value.icon;
 
   return (
     <motion.div
       initial={prefersReduced ? {} : { opacity: 0, y: 14 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.38, ease: "easeOut", delay: index * 0.08 }}
-      whileHover={prefersReduced ? {} : { y: -4, transition: { duration: 0.22, ease: "easeOut" } }}
+      transition={{ duration: 0.35, ease: "easeOut", delay: index * 0.07 }}
+      whileHover={
+        prefersReduced
+          ? {}
+          : { y: -4, transition: { duration: 0.22, ease: "easeOut" } }
+      }
       className="h-full"
     >
-      <SpotlightCard
-        className={cn(
-          "h-full rounded-lg border bg-card text-card-foreground shadow-sm",
-          "border-border/60 transition-[border-color,box-shadow] duration-300",
-          "hover:border-primary/35 hover:shadow-[0_6px_28px_hsl(173_58%_39%_/_0.10)]"
-        )}
-      >
+      <SpotlightCard className={cn("h-full card-base card-hover-glow")}>
         <div className="p-6">
           {/* Icon + title row */}
           <div className="mb-4 flex items-center gap-4">
@@ -70,12 +75,18 @@ function ValueCard({ value, index }: { value: typeof values[0]; index: number })
               whileHover={
                 prefersReduced
                   ? {}
-                  : { scale: 1.1, rotate: 8, transition: { duration: 0.22, ease: "easeOut" } }
+                  : {
+                      scale: 1.1,
+                      rotate: 8,
+                      transition: { duration: 0.22, ease: "easeOut" },
+                    }
               }
             >
               <Icon className="h-5 w-5 text-primary" aria-hidden="true" />
             </motion.div>
-            <h3 className="font-heading text-heading-3 font-semibold">{value.title}</h3>
+            <h3 className="font-heading text-heading-3 font-semibold">
+              {value.title}
+            </h3>
           </div>
 
           {/* Description */}
@@ -85,7 +96,7 @@ function ValueCard({ value, index }: { value: typeof values[0]; index: number })
         </div>
       </SpotlightCard>
     </motion.div>
-  )
+  );
 }
 
 export function Values() {
@@ -94,11 +105,7 @@ export function Values() {
       <div className="container mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-24">
         <div className="mx-auto max-w-6xl">
           <Reveal>
-            <div className="mb-10 sm:mb-12 flex items-center justify-center gap-3">
-              <div className="h-px w-16 bg-gradient-to-r from-transparent to-primary/40" aria-hidden="true" />
-              <h2 className="font-heading text-heading-2 font-semibold text-center">Focus Areas</h2>
-              <div className="h-px w-16 bg-gradient-to-l from-transparent to-primary/40" aria-hidden="true" />
-            </div>
+            <SectionHeading>Focus Areas</SectionHeading>
           </Reveal>
 
           <div className="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2">
@@ -109,5 +116,5 @@ export function Values() {
         </div>
       </div>
     </section>
-  )
+  );
 }

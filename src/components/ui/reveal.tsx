@@ -8,7 +8,7 @@
 
 import { type ReactNode } from "react"
 import { motion, useReducedMotion } from "framer-motion"
-import { fadeUp } from "@/lib/animation"
+import { fadeUp, scrollReveal } from "@/lib/animation"
 
 interface RevealProps {
     children: ReactNode
@@ -32,7 +32,7 @@ export function Reveal({ children, className, delay = 0 }: RevealProps) {
             className={className}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
+            viewport={scrollReveal.viewport}
             variants={{
                 ...fadeUp,
                 visible: {

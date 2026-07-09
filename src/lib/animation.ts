@@ -45,3 +45,17 @@ export const iconHover = {
     rest: { scale: 1, rotate: 0 },
     hover: { scale: 1.1, rotate: 8, transition: { duration: 0.25, ease: "easeOut" } },
 }
+
+/**
+ * Standardized scroll-trigger animation helpers.
+ * All delays use a consistent base of 0.07s per item.
+ * Viewport margin is standardized to -40px.
+ */
+export const scrollReveal = {
+    viewport: { once: true as const, margin: "-40px" as const },
+    transition: { duration: 0.35, ease: "easeOut" as const },
+}
+
+export const staggerItem = (index: number, base = 0.07) => ({
+    transition: { duration: 0.35, ease: "easeOut", delay: index * base },
+})

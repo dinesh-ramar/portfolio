@@ -14,6 +14,7 @@ import { motion, useReducedMotion } from "framer-motion"
 import { Badge } from "@/components/ui/badge"
 import { SpotlightCard } from "@/components/ui/spotlight-card"
 import { Reveal } from "@/components/ui/reveal"
+import { SectionHeading } from "@/components/ui/section-heading"
 import { cn } from "@/lib/utils"
 
 interface SkillGroup {
@@ -36,17 +37,12 @@ function SkillCard({ group, index }: { group: SkillGroup; index: number }) {
     <motion.div
       initial={prefersReduced ? {} : { opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.38, ease: "easeOut", delay: index * 0.07 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.35, ease: "easeOut", delay: index * 0.07 }}
       whileHover={prefersReduced ? {} : { y: -4, transition: { duration: 0.22, ease: "easeOut" } }}
       className="h-full"
     >
-      <SpotlightCard
-        className={cn(
-          "h-full rounded-lg border bg-card text-card-foreground shadow-sm",
-          "border-border/60 transition-[border-color,box-shadow] duration-300",
-          "hover:border-primary/30 hover:shadow-[0_4px_24px_hsl(173_58%_39%_/_0.08)]"
-        )}
+      <SpotlightCard className={cn("h-full card-base card-hover-glow")}
       >
         {/* Card header */}
         <div className="p-6 pb-3">
@@ -88,11 +84,7 @@ export function Skills() {
       <div className="container mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-24">
         <div className="mx-auto max-w-6xl">
           <Reveal>
-            <div className="mb-12 flex items-center justify-center gap-3">
-              <div className="h-px w-16 bg-gradient-to-r from-transparent to-primary/40" aria-hidden="true" />
-              <h2 className="font-heading text-heading-2 font-semibold text-center">Skills</h2>
-              <div className="h-px w-16 bg-gradient-to-l from-transparent to-primary/40" aria-hidden="true" />
-            </div>
+            <SectionHeading>Skills</SectionHeading>
           </Reveal>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 sm:gap-6">

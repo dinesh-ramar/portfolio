@@ -9,6 +9,7 @@
 
 import { motion, useReducedMotion } from "framer-motion"
 import { Reveal } from "@/components/ui/reveal"
+import { SectionHeading } from "@/components/ui/section-heading"
 import { cn } from "@/lib/utils"
 
 interface SpecialisationItem {
@@ -62,7 +63,7 @@ function SpecialisationCard({ item, index }: { item: SpecialisationItem; index: 
       initial={prefersReduced ? {} : { opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.35, ease: "easeOut", delay: index * 0.05 }}
+      transition={{ duration: 0.35, ease: "easeOut", delay: index * 0.07 }}
       whileHover={prefersReduced ? {} : { y: -3, transition: { duration: 0.2 } }}
       className={cn(
         "flex items-start gap-4 rounded-lg border border-transparent p-3",
@@ -72,7 +73,7 @@ function SpecialisationCard({ item, index }: { item: SpecialisationItem; index: 
     >
       {/* Timeline accent */}
       <div className="mt-1 flex-shrink-0 flex flex-col items-center" aria-hidden="true">
-        <span className="h-2 w-2 rounded-full bg-primary" />
+        <span className="h-2.5 w-2.5 rounded-full border-2 border-primary bg-background" />
         {index < SPECIALISATIONS.length - 1 && (
           <span className="mt-1 w-px flex-1 bg-border/60" style={{ minHeight: "24px" }} />
         )}
@@ -92,11 +93,9 @@ export function About() {
       <div className="container mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-24">
         <div className="mx-auto max-w-3xl">
           <Reveal>
-            <div className="mb-8 flex items-center gap-3">
-              <h2 className="font-heading text-heading-2 font-semibold">About Me</h2>
-              {/* Accent underline */}
-              <div className="h-px flex-1 bg-gradient-to-r from-primary/40 to-transparent" aria-hidden="true" />
-            </div>
+            <SectionHeading align="left" marginBottom="mb-8">
+              About Me
+            </SectionHeading>
           </Reveal>
 
           <Reveal delay={0.05}>
