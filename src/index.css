@@ -45,28 +45,69 @@
   * {
     @apply border-border;
   }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-background text-foreground;
     font-family: 'Inter', sans-serif;
     font-size: 16px;
     line-height: 1.5;
+    /* Prevent layout shift from scrollbar appearing/disappearing */
+    scrollbar-gutter: stable;
   }
-  h1, h2, h3, h4, h5, h6 {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  /* Ensure all interactive elements have a minimum 44px touch target */
+  button,
+  a,
+  [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Override for inline/small elements that don't need it */
+  a[aria-hidden="true"],
+  span[aria-hidden="true"] {
+    min-height: unset;
+    min-width: unset;
   }
 }
 
 @layer utilities {
-  /* Focus styles for accessibility */
+
+  /* Reusable focus ring consistent with the primary theme color */
   .focus-visible-ring {
     @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background;
   }
-  
-  /* Smooth transitions for theme changes */
+
+  /* Smooth transitions for theme changes — color only to avoid interfering with Framer Motion transforms */
   * {
-    transition-property: background-color, border-color, color;
+    transition-property: background-color, border-color, color, fill, stroke;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 150ms;
   }
-}
 
+  /* Respect prefers-reduced-motion: pause all animations and transitions */
+  @media (prefers-reduced-motion: reduce) {
+
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
