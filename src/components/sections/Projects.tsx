@@ -11,30 +11,30 @@
  * ReactBits inspiration: Spotlight Card, Tilted Card, Border Glow
  */
 
-import { useRef } from "react"
-import { motion, useReducedMotion } from "framer-motion"
-import { ExternalLink, Github } from "lucide-react"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { SpotlightCard } from "@/components/ui/spotlight-card"
-import { Reveal } from "@/components/ui/reveal"
-import { SectionHeading } from "@/components/ui/section-heading"
-import { cn } from "@/lib/utils"
+import { useRef } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import { ExternalLink, Github } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { SpotlightCard } from "@/components/ui/spotlight-card";
+import { Reveal } from "@/components/ui/reveal";
+import { SectionHeading } from "@/components/ui/section-heading";
+import { cn } from "@/lib/utils";
 
 interface ProjectMetric {
-  label: string
+  label: string;
 }
 
 interface ProjectCard {
-  id: string
-  title: string
-  role: string
-  overview: string
-  responsibilities: string[]
-  metrics: ProjectMetric[]
-  techStack: string[]
-  demoUrl?: string
-  githubUrl?: string
+  id: string;
+  title: string;
+  role: string;
+  overview: string;
+  responsibilities: string[];
+  metrics: ProjectMetric[];
+  techStack: string[];
+  demoUrl?: string;
+  githubUrl?: string;
 }
 
 const PROJECTS: ProjectCard[] = [
@@ -74,9 +74,18 @@ const PROJECTS: ProjectCard[] = [
     metrics: [
       { label: "Managers get live status updates without manual refreshing" },
       { label: "Fewer runtime bugs caught earlier through strict typing" },
-      { label: "Faster delivery of new dashboard views using existing components" },
+      {
+        label:
+          "Faster delivery of new dashboard views using existing components",
+      },
     ],
-    techStack: ["React", "TypeScript", "React Query", "Context API", "Tailwind CSS"],
+    techStack: [
+      "React",
+      "TypeScript",
+      "React Query",
+      "Context API",
+      "Tailwind CSS",
+    ],
   },
   {
     id: "xerago",
@@ -93,10 +102,18 @@ const PROJECTS: ProjectCard[] = [
     ],
     metrics: [
       { label: "20+ reusable components" },
-      { label: "Improved search visibility through semantic HTML and meta tags" },
+      {
+        label: "Improved search visibility through semantic HTML and meta tags",
+      },
       { label: "Faster initial page loads for site visitors" },
     ],
-    techStack: ["React", "Redux Toolkit", "Tailwind CSS", "Lazy Loading", "SEO"],
+    techStack: [
+      "React",
+      "Redux Toolkit",
+      "Tailwind CSS",
+      "Lazy Loading",
+      "SEO",
+    ],
   },
   {
     id: "saas",
@@ -111,38 +128,43 @@ const PROJECTS: ProjectCard[] = [
       "Optimised performance through route-based code splitting and lazy loading",
     ],
     metrics: [
-      { label: "~65% reduction in initial load — isolated the charting library into its own lazy-loaded chunk" },
+      {
+        label:
+          "~65% reduction in initial load — isolated the charting library into its own lazy-loaded chunk",
+      },
     ],
     techStack: ["React", "Vite", "Tailwind CSS", "Recharts", "Context API"],
     demoUrl: "https://saa-s-admin-dashboard-seven.vercel.app",
     githubUrl: "https://github.com/dinesh-ramar/SaaS_Admin_Dashboard",
   },
-]
+];
 
-const MAX_TILT = 3 // degrees
+const MAX_TILT = 3; // degrees
 
 function TiltCard({ card, index }: { card: ProjectCard; index: number }) {
-  const cardRef = useRef<HTMLDivElement>(null)
-  const prefersReduced = useReducedMotion()
+  const cardRef = useRef<HTMLDivElement>(null);
+  const prefersReduced = useReducedMotion();
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (prefersReduced || !cardRef.current) return
-    const rect = cardRef.current.getBoundingClientRect()
-    const x = (e.clientX - rect.left) / rect.width - 0.5   // -0.5 to 0.5
-    const y = (e.clientY - rect.top) / rect.height - 0.5
-    cardRef.current.style.transform = `perspective(800px) rotateY(${x * MAX_TILT * 2}deg) rotateX(${-y * MAX_TILT * 2}deg) translateY(-4px)`
-  }
+    if (prefersReduced || !cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5; // -0.5 to 0.5
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    cardRef.current.style.transform = `perspective(800px) rotateY(${x * MAX_TILT * 2}deg) rotateX(${-y * MAX_TILT * 2}deg) translateY(-4px)`;
+  };
 
   const handleMouseLeave = () => {
-    if (!cardRef.current) return
-    cardRef.current.style.transform = "perspective(800px) rotateY(0deg) rotateX(0deg) translateY(0px)"
-    cardRef.current.style.transition = "transform 0.35s ease-out"
-  }
+    if (!cardRef.current) return;
+    cardRef.current.style.transform =
+      "perspective(800px) rotateY(0deg) rotateX(0deg) translateY(0px)";
+    cardRef.current.style.transition = "transform 0.35s ease-out";
+  };
 
   const handleMouseEnter = () => {
-    if (!cardRef.current) return
-    cardRef.current.style.transition = "transform 0.1s ease-out, box-shadow 0.3s ease-out"
-  }
+    if (!cardRef.current) return;
+    cardRef.current.style.transition =
+      "transform 0.1s ease-out, box-shadow 0.3s ease-out";
+  };
 
   return (
     <motion.div
@@ -157,35 +179,48 @@ function TiltCard({ card, index }: { card: ProjectCard; index: number }) {
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         onMouseEnter={handleMouseEnter}
-        style={{ willChange: "transform", transformStyle: "preserve-3d", transition: "transform 0.35s ease-out, box-shadow 0.3s ease-out" }}
+        style={{
+          willChange: "transform",
+          transformStyle: "preserve-3d",
+          transition: "transform 0.35s ease-out, box-shadow 0.3s ease-out",
+        }}
         className="h-full"
       >
         <SpotlightCard
           className={cn(
-            "h-full flex flex-col card-base",
-            "hover:border-primary/40 hover:shadow-[var(--glow-strong)]"
+            "h-full flex flex-col card-base card-hover-glow-strong"
           )}
         >
           {/* Card header */}
           <div className="p-4 sm:p-6 pb-3 sm:pb-4">
-            <h3 className="font-heading text-heading-3 font-semibold mb-1">{card.title}</h3>
+            <h3 className="font-heading text-heading-3 font-semibold mb-1">
+              {card.title}
+            </h3>
             <p className="text-sm font-medium text-primary">{card.role}</p>
           </div>
 
           {/* Card body */}
           <div className="flex flex-1 flex-col gap-3 sm:gap-4 p-4 sm:p-6 pt-0">
             {/* Overview */}
-            <p className="text-body text-muted-foreground leading-relaxed">{card.overview}</p>
+            <p className="text-body text-muted-foreground leading-relaxed">
+              {card.overview}
+            </p>
 
             {/* Responsibilities */}
             <div>
               <h3 className="text-sm font-semibold text-foreground mb-2 uppercase tracking-wide">
                 Responsibilities
               </h3>
-              <ul className="space-y-1 text-body" aria-label={`${card.title} responsibilities`}>
+              <ul
+                className="space-y-1 text-body"
+                aria-label={`${card.title} responsibilities`}
+              >
                 {card.responsibilities.map((item, i) => (
                   <li key={i} className="flex items-start gap-2">
-                    <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary/70" aria-hidden="true" />
+                    <span
+                      className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary/70"
+                      aria-hidden="true"
+                    />
                     <span className="text-muted-foreground">{item}</span>
                   </li>
                 ))}
@@ -197,11 +232,21 @@ function TiltCard({ card, index }: { card: ProjectCard; index: number }) {
               <h3 className="text-sm font-semibold text-foreground mb-2 uppercase tracking-wide">
                 Results
               </h3>
-              <ul className="space-y-1 text-body" aria-label={`${card.title} results`}>
+              <ul
+                className="space-y-1 text-body"
+                aria-label={`${card.title} results`}
+              >
                 {card.metrics.map((metric, i) => (
                   <li key={i} className="flex items-start gap-2">
-                    <span className="text-primary font-bold flex-shrink-0 leading-5" aria-hidden="true">✓</span>
-                    <span className="text-muted-foreground">{metric.label}</span>
+                    <span
+                      className="text-primary font-bold flex-shrink-0 leading-5"
+                      aria-hidden="true"
+                    >
+                      ✓
+                    </span>
+                    <span className="text-muted-foreground">
+                      {metric.label}
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -212,7 +257,11 @@ function TiltCard({ card, index }: { card: ProjectCard; index: number }) {
               <h3 className="text-sm font-semibold text-foreground mb-2 uppercase tracking-wide">
                 Tech Stack
               </h3>
-              <div className="flex flex-wrap gap-1.5" role="list" aria-label={`${card.title} technologies`}>
+              <div
+                className="flex flex-wrap gap-1.5"
+                role="list"
+                aria-label={`${card.title} technologies`}
+              >
                 {card.techStack.map((tech) => (
                   <Badge
                     key={tech}
@@ -255,7 +304,7 @@ function TiltCard({ card, index }: { card: ProjectCard; index: number }) {
         </SpotlightCard>
       </div>
     </motion.div>
-  )
+  );
 }
 
 /** Button that wraps an <a> with hover micro-interaction */
@@ -265,10 +314,10 @@ function AnimatedLinkButton({
   "aria-label": ariaLabel,
   variant,
 }: {
-  href: string
-  children: React.ReactNode
-  "aria-label": string
-  variant: "default" | "outline"
+  href: string;
+  children: React.ReactNode;
+  "aria-label": string;
+  variant: "default" | "outline";
 }) {
   return (
     <Button
@@ -277,7 +326,7 @@ function AnimatedLinkButton({
       size="sm"
       className={cn(
         "transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98]",
-        "focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1"
+        "focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1",
       )}
     >
       <a
@@ -289,7 +338,7 @@ function AnimatedLinkButton({
         {children}
       </a>
     </Button>
-  )
+  );
 }
 
 function ExternalLinkAnimated() {
@@ -301,7 +350,7 @@ function ExternalLinkAnimated() {
     >
       <ExternalLink className="h-4 w-4" />
     </motion.span>
-  )
+  );
 }
 
 function GithubAnimated() {
@@ -313,7 +362,7 @@ function GithubAnimated() {
     >
       <Github className="h-4 w-4" />
     </motion.span>
-  )
+  );
 }
 
 export function Projects() {
@@ -333,5 +382,5 @@ export function Projects() {
         </div>
       </div>
     </section>
-  )
+  );
 }

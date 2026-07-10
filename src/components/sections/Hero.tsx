@@ -2,23 +2,27 @@
  * Hero — enhanced with:
  * - Decrypted Text reveal for the role title (plays once)
  * - MagnetButton on CTAs
- * - FloatingLines background at <7% opacity
+ * - FloatingLines WebGL background (subtle teal gradient, behind content)
  * - Subtle glow behind content via a blurred radial gradient
  * - CountUp for stats (same data as Achievements, avoids duplication)
  * - Staggered fade-up entry for each text block
  * - All animations respect prefers-reduced-motion
  */
 
-import { motion, useReducedMotion } from "framer-motion"
-import { ArrowDown, Download } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { FloatingLines } from "@/components/ui/floating-lines"
-import { DecryptedText } from "@/components/ui/decrypted-text"
-import { MagnetButton } from "@/components/ui/magnet-button"
-import { staggerContainer, fadeUp } from "@/lib/animation"
+import { lazy, Suspense, useRef } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import { ArrowDown, Download } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { DecryptedText } from "@/components/ui/decrypted-text";
+import { MagnetButton } from "@/components/ui/magnet-button";
+import { staggerContainer, fadeUp } from "@/lib/animation";
+
+// Three.js is heavy; load the WebGL background lazily so it stays out of the
+// initial bundle and does not affect Lighthouse Performance.
+const FloatingLines = lazy(() => import("@/components/ui/floating-lines"));
 
 interface HighlightCard {
-  label: string
+  label: string;
 }
 
 const HIGHLIGHT_CARDS: HighlightCard[] = [
@@ -30,27 +34,43 @@ const HIGHLIGHT_CARDS: HighlightCard[] = [
   { label: "WCAG 2.1 AA" },
   { label: "VAPT Remediation" },
   { label: "Banking Domain Experience" },
-]
+];
 
 export function Hero() {
-  const prefersReduced = useReducedMotion()
+  const prefersReduced = useReducedMotion();
+  const sectionRef = useRef<HTMLElement | null>(null);
 
   const scrollToProjects = () => {
-    document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })
-  }
+    document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <section
+      ref={sectionRef}
       id="hero"
       className="relative w-full overflow-hidden"
     >
-      {/* Subtle floating lines background — placed at section level so it fills the section */}
-      <FloatingLines className="absolute inset-0" count={5} />
+      {/* Subtle floating lines background — WebGL, behind content, non-interactive.
+          Composition (band center = ruv.y of -wavePos.y): lower band (top, y 0.65 →
+          -0.65), center band behind heading (middle, y 0), upper band (bottom, y -0.65 →
+          +0.65) for upper-right coverage. x/rotation only interleave crests; lineCount
+          adds density behind content. No color/speed/intensity changes. */}
+      <Suspense fallback={null}>
+        <FloatingLines
+          className="absolute inset-0 z-0"
+          lineCount={[6, 8, 6]}
+          lineDistance={[6, 7, 6]}
+          topWavePosition={{ x: -7, y: 0.65, rotate: -0.5 }}
+          middleWavePosition={{ x: 0, y: 0.0, rotate: 0.3 }}
+          bottomWavePosition={{ x: 3, y: -0.65, rotate: 0.6 }}
+          eventTargetRef={sectionRef}
+        />
+      </Suspense>
 
       {/* Subtle radial glow behind main content */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-1/3 -translate-x-1/2 -translate-y-1/2 h-[min(420px,80vw)] w-[min(420px,80vw)] rounded-full"
+        className="pointer-events-none absolute left-1/2 top-1/3 -translate-x-1/2 -translate-y-1/2 z-0 h-[min(420px,80vw)] w-[min(420px,80vw)] rounded-full"
         style={{
           background:
             "radial-gradient(circle, var(--glow-radial-subtle) 0%, transparent 70%)",
@@ -58,7 +78,7 @@ export function Hero() {
         }}
       />
 
-      <div className="container mx-auto px-4 sm:px-6 py-16 sm:py-24 md:py-32">
+      <div className="container relative z-10 mx-auto px-4 sm:px-6 pt-32 pb-16 sm:pt-36 sm:pb-24 md:pt-40 md:pb-32">
         <motion.div
           className="relative mx-auto max-w-3xl text-center"
           variants={staggerContainer}
@@ -81,7 +101,8 @@ export function Hero() {
             variants={prefersReduced ? {} : fadeUp}
             className="text-base sm:text-lg md:text-xl mb-5 sm:mb-6 font-semibold text-muted-foreground leading-snug"
           >
-            Building secure, scalable, and accessible React applications for enterprise and banking products.
+            Building secure, scalable, and accessible React applications for
+            enterprise and banking products.
           </motion.p>
 
           {/* Bio */}
@@ -89,10 +110,11 @@ export function Hero() {
             variants={prefersReduced ? {} : fadeUp}
             className="text-sm sm:text-base mb-7 sm:mb-8 text-muted-foreground leading-relaxed"
           >
-            Frontend React.js Developer with 4+ years of experience building production-ready web
-            applications using React.js, TypeScript, Redux Toolkit, React Query, and REST APIs.
-            Specialised in accessibility, performance optimisation, reusable component architecture,
-            and security-first frontend development.
+            Frontend React.js Developer with 4+ years of experience building
+            production-ready web applications using React.js, TypeScript, Redux
+            Toolkit, React Query, and REST APIs. Specialised in accessibility,
+            performance optimisation, reusable component architecture, and
+            security-first frontend development.
           </motion.p>
 
           {/* Highlight badges */}
@@ -154,5 +176,5 @@ export function Hero() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }
