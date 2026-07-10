@@ -13,6 +13,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { SpotlightCard } from "@/components/ui/spotlight-card";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { TimelineDot } from "@/components/ui/timeline";
 import { cn } from "@/lib/utils";
 
 interface ExperienceBullet {
@@ -59,8 +60,7 @@ export function Experience() {
           >
             <SpotlightCard
               className={cn(
-                "card-base p-4 sm:p-6 md:p-8",
-                "hover:border-primary/35 hover:shadow-[var(--glow-subtle)]",
+                "card-base card-hover-glow-subtle p-4 sm:p-6 md:p-8",
               )}
             >
               {/* Role header */}
@@ -113,10 +113,7 @@ export function Experience() {
                       className="relative flex items-start gap-2 text-sm sm:text-body"
                     >
                       {/* Timeline dot */}
-                      <span
-                        className="absolute -left-8 mt-2 h-2.5 w-2.5 rounded-full border-2 border-primary bg-background flex-shrink-0"
-                        aria-hidden="true"
-                      />
+                      <TimelineDot />
                       <span className="text-muted-foreground leading-relaxed">
                         {bullet.text}
                       </span>

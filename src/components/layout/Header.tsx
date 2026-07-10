@@ -30,6 +30,7 @@ const NAV_LINKS: NavLink[] = [
 export function Header() {
   const [activeSection, setActiveSection] = useState<string>("");
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const prefersReduced = useReducedMotion();
 
   // Active section tracking — fires when a section's top edge crosses 25% down
@@ -86,6 +87,18 @@ export function Header() {
     };
   }, [mobileOpen]);
 
+  // Make the header more transparent over the Hero and more readable once the
+  // user scrolls into content sections.
+  useEffect(() => {
+    const updateScrolled = () => {
+      setIsScrolled(window.scrollY > 8);
+    };
+
+    updateScrolled();
+    window.addEventListener("scroll", updateScrolled, { passive: true });
+    return () => window.removeEventListener("scroll", updateScrolled);
+  }, []);
+
   const navAnimation = prefersReduced
     ? {}
     : {
@@ -96,10 +109,17 @@ export function Header() {
 
   return (
     <>
-      <header className="fixed top-0 inset-x-0 z-50 w-full border-b border-border/60 bg-background/90 backdrop-blur-md supports-[backdrop-filter]:bg-background/75">
+      <header
+        className={cn(
+          "fixed top-0 inset-x-0 z-50 w-full border-b backdrop-blur-md transition-[background-color,border-color,box-shadow] duration-300 supports-[backdrop-filter]:backdrop-blur-md",
+          isScrolled
+            ? "border-border/60 bg-background/90 shadow-sm supports-[backdrop-filter]:bg-background/80"
+            : "border-border/30 bg-background/35 supports-[backdrop-filter]:bg-background/25",
+        )}
+      >
         <motion.div
           {...navAnimation}
-          className="container flex h-16 items-center px-4 sm:px-6"
+          className="container relative mx-auto flex h-16 items-center px-4 sm:px-6"
         >
           {/* Skip link */}
           <a
@@ -109,10 +129,10 @@ export function Header() {
             Skip to main content
           </a>
 
-          {/* Desktop nav — left aligned, items vertically centered */}
+          {/* Desktop nav — centered independently from the right-side controls */}
           <nav
             aria-label="Main navigation"
-            className="hidden md:flex items-center gap-1 rounded-full border border-border/50 bg-muted/40 px-2 py-0.5"
+            className="absolute left-1/2 hidden -translate-x-1/2 md:flex items-center gap-1 rounded-full border border-border/50 bg-background/45 px-2 py-0.5 shadow-sm backdrop-blur-md supports-[backdrop-filter]:bg-background/35"
           >
             {NAV_LINKS.map((link) => {
               const isActive = activeSection === link.sectionId;
@@ -255,7 +275,7 @@ export function Header() {
         )}
       </AnimatePresence>
 
-      {/* Spacer is handled via pt-16 on <main> in App.tsx */}
+      {/* Fixed-header scroll offset is handled globally via scroll-padding-top. */}
     </>
   );
 }

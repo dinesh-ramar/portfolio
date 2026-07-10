@@ -10,6 +10,7 @@
 import { motion, useReducedMotion } from "framer-motion"
 import { Reveal } from "@/components/ui/reveal"
 import { SectionHeading } from "@/components/ui/section-heading"
+import { TimelineDot, TimelineLine } from "@/components/ui/timeline"
 import { cn } from "@/lib/utils"
 
 interface SpecialisationItem {
@@ -73,9 +74,9 @@ function SpecialisationCard({ item, index }: { item: SpecialisationItem; index: 
     >
       {/* Timeline accent */}
       <div className="mt-1 flex-shrink-0 flex flex-col items-center" aria-hidden="true">
-        <span className="h-2.5 w-2.5 rounded-full border-2 border-primary bg-background" />
+        <TimelineDot className="relative" />
         {index < SPECIALISATIONS.length - 1 && (
-          <span className="mt-1 w-px flex-1 bg-border/60" style={{ minHeight: "24px" }} />
+          <TimelineLine opacityClass="bg-border/60" />
         )}
       </div>
 

@@ -50,13 +50,21 @@
     --secondary: 173 40% 96%;
     --secondary-foreground: 173 80% 24%;
     --radius: 0.5rem;
-    /* Glow & shadow design tokens — derived from primary */
-    --glow-subtle: 0 4px 24px hsl(173 58% 39% / 0.08);
-    --glow-medium: 0 8px 32px hsl(173 58% 39% / 0.10);
-    --glow-strong: 0 8px 32px hsl(173 58% 39% / 0.12);
-    --glow-radial-subtle: hsl(173 58% 39% / 0.07);
-    --glow-spotlight: hsl(173 58% 39% / 0.08);
-    --glow-floating-line: hsl(173 58% 39%);
+    /* Shared glow teal — single source of truth for all glow colors.
+       Glows intentionally use a brighter teal than light-mode --primary
+       so they stay visible on light surfaces; dark mode reuses it. */
+    --glow-teal: 173 58% 39%;
+    /* Glow & shadow design tokens — all derived from --glow-teal */
+    --glow-subtle: 0 4px 24px hsl(var(--glow-teal) / 0.08);
+    --glow-medium: 0 8px 32px hsl(var(--glow-teal) / 0.10);
+    --glow-strong: 0 8px 32px hsl(var(--glow-teal) / 0.12);
+    --glow-radial-subtle: hsl(var(--glow-teal) / 0.07);
+    --glow-spotlight: hsl(var(--glow-teal) / 0.08);
+    --glow-floating-line: hsl(var(--glow-teal));
+    /* Standardized opacity scale for background/decorative layers */
+    --o-line: 1;
+    --o-hover-border: 0.4;
+    --o-accent: 0.4;
   }
 
   .dark {
@@ -74,12 +82,16 @@
     --secondary: 173 20% 20%;
     --secondary-foreground: 173 58% 39%;
     --radius: 0.5rem;
-    --glow-subtle: 0 4px 24px hsl(173 58% 39% / 0.12);
-    --glow-medium: 0 8px 32px hsl(173 58% 39% / 0.15);
-    --glow-strong: 0 8px 32px hsl(173 58% 39% / 0.20);
-    --glow-radial-subtle: hsl(173 58% 39% / 0.10);
-    --glow-spotlight: hsl(173 58% 39% / 0.12);
-    --glow-floating-line: hsl(173 58% 39% / 0.6);
+    --glow-teal: 173 58% 39%;
+    --glow-subtle: 0 4px 24px hsl(var(--glow-teal) / 0.12);
+    --glow-medium: 0 8px 32px hsl(var(--glow-teal) / 0.15);
+    --glow-strong: 0 8px 32px hsl(var(--glow-teal) / 0.20);
+    --glow-radial-subtle: hsl(var(--glow-teal) / 0.10);
+    --glow-spotlight: hsl(var(--glow-teal) / 0.12);
+    --glow-floating-line: hsl(var(--glow-teal) / 0.6);
+    --o-line: 0.6;
+    --o-hover-border: 0.4;
+    --o-accent: 0.5;
   }
 }
 
@@ -90,9 +102,16 @@
 
   html {
     scroll-behavior: smooth;
-    /* Prevent horizontal overflow at the document level */
+    /* Keep hash navigation and scrollIntoView targets clear of the fixed
+       4rem header after the Hero was moved underneath it visually. */
+    scroll-padding-top: 4rem;
+    /* Reserve scrollbar space on the actual viewport scroller so normal-flow
+       blocks and fixed elements share the exact same width. Putting this on
+       <body> instead reserved an extra gutter that narrowed the Hero (and all
+       in-flow content) by one scrollbar width vs. the fixed Header. */
+    scrollbar-gutter: stable;
+    /* Prevent horizontal overflow at the document level. */
     overflow-x: hidden;
-    max-width: 100%;
   }
 
   body {
@@ -100,11 +119,9 @@
     font-family: 'Inter', sans-serif;
     font-size: 16px;
     line-height: 1.5;
-    /* Prevent layout shift from scrollbar appearing/disappearing */
-    scrollbar-gutter: stable;
-    /* Ensure no horizontal overflow leaks through */
+    /* Clip accidental horizontal overflow; body is not the scroll container
+       (html is), so this does not narrow in-flow content. */
     overflow-x: hidden;
-    max-width: 100%;
   }
 
   h1,
@@ -140,9 +157,19 @@
     @apply rounded-lg border bg-card text-card-foreground shadow-sm border-border/60 transition-[border-color,box-shadow] duration-300;
   }
 
-  /* Card hover glow — standardized intensity */
+  /* Card hover glow — standardized border + glow scale (subtle/medium/strong) */
   .card-hover-glow {
-    @apply hover:border-primary/35 hover:shadow-[var(--glow-medium)];
+    @apply hover:border-primary/40 hover:shadow-[var(--glow-medium)];
+  }
+
+  /* Stronger card hover glow for primary-feature cards (e.g. Projects) */
+  .card-hover-glow-strong {
+    @apply hover:border-primary/40 hover:shadow-[var(--glow-strong)];
+  }
+
+  /* Subtle card hover glow for compact cards (e.g. Achievements) */
+  .card-hover-glow-subtle {
+    @apply hover:border-primary/40 hover:shadow-[var(--glow-subtle)];
   }
 }
 

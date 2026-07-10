@@ -23,21 +23,35 @@ export function SpotlightCard({
     spotlightColor = "var(--glow-spotlight)",
 }: SpotlightCardProps) {
     const cardRef = useRef<HTMLDivElement>(null)
+    const frame = useRef<number | null>(null)
 
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
         const card = cardRef.current
         if (!card) return
+        // Cache geometry once per card; pointer coords read at paint time.
         const rect = card.getBoundingClientRect()
-        const x = e.clientX - rect.left
-        const y = e.clientY - rect.top
-        card.style.setProperty("--spotlight-x", `${x}px`)
-        card.style.setProperty("--spotlight-y", `${y}px`)
-        card.style.setProperty("--spotlight-opacity", "1")
+        const clientX = e.clientX
+        const clientY = e.clientY
+        // Coalesce multiple mousemove events into a single rAF write to
+        // avoid layout thrash / redundant CSS-var updates per frame.
+        if (frame.current !== null) return
+        frame.current = requestAnimationFrame(() => {
+            frame.current = null
+            const x = clientX - rect.left
+            const y = clientY - rect.top
+            card.style.setProperty("--spotlight-x", `${x}px`)
+            card.style.setProperty("--spotlight-y", `${y}px`)
+            card.style.setProperty("--spotlight-opacity", "1")
+        })
     }
 
     const handleMouseLeave = () => {
         const card = cardRef.current
         if (!card) return
+        if (frame.current !== null) {
+            cancelAnimationFrame(frame.current)
+            frame.current = null
+        }
         card.style.setProperty("--spotlight-opacity", "0")
     }
 

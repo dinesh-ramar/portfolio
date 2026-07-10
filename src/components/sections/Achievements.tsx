@@ -46,7 +46,7 @@ function AchievementItem({ card, index }: { card: AchievementCard; index: number
             <SpotlightCard
                 className={cn(
                     "flex flex-col items-center justify-center p-4 sm:p-6 text-center",
-                    "card-base hover:border-primary/40 hover:shadow-[var(--glow-subtle)]"
+                    "card-base card-hover-glow-subtle"
                 )}
             >
                 {/* Metric — CountUp only on numeric portion */}

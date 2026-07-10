@@ -22,6 +22,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { MagnetButton } from "@/components/ui/magnet-button";
 import { Reveal } from "@/components/ui/reveal";
+import { SectionHeading } from "@/components/ui/section-heading";
 import { cn } from "@/lib/utils";
 
 const EMAIL = "dineshramar413@gmail.com";
@@ -95,14 +96,7 @@ export function Contact() {
       <div className="container mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-24">
         <div className="mx-auto max-w-2xl text-center">
           <Reveal>
-            <h2 className="font-heading text-heading-2 mb-4 font-semibold">
-              Get In Touch
-            </h2>
-            {/* Subtle accent under heading */}
-            <div
-              className="mx-auto mb-6 h-px w-24 bg-gradient-to-r from-transparent via-primary/50 to-transparent"
-              aria-hidden="true"
-            />
+            <SectionHeading>Get In Touch</SectionHeading>
           </Reveal>
 
           <Reveal delay={0.05}>
