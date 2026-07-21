@@ -2,19 +2,7 @@ import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { Hero } from "@/components/sections/Hero";
 
-// Feature: portfolio-upgrade, Property 1: Hero highlight cards completeness
 describe("Hero", () => {
-  const REQUIRED_LABELS = [
-    "4+ Years Experience",
-    "10+ React UI Modules Delivered",
-    "25% Bundle Size Reduction",
-    "90+ Lighthouse Accessibility",
-    "7+ Secure REST API Integrations",
-    "WCAG 2.1 AA",
-    "VAPT Remediation",
-    "Banking Domain Experience",
-  ];
-
   beforeEach(() => {
     // Mock scrollIntoView which is not available in jsdom
     window.HTMLElement.prototype.scrollIntoView = vi.fn();
@@ -28,26 +16,35 @@ describe("Hero", () => {
     vi.restoreAllMocks();
   });
 
-  it("renders all eight Quick Highlights labels", () => {
+  it("renders the role label and name", () => {
     render(<Hero />);
 
-    for (const label of REQUIRED_LABELS) {
-      expect(screen.getByText(label)).toBeInTheDocument();
+    expect(screen.getByText("React Frontend Developer")).toBeInTheDocument();
+    expect(screen.getByText("Dinesh Ramar")).toBeInTheDocument();
+  });
+
+  it("renders tech stack items", () => {
+    const TECH = ["React", "JavaScript", "TypeScript", "Redux Toolkit", "Tailwind CSS"];
+    render(<Hero />);
+
+    for (const tech of TECH) {
+      expect(screen.getByText(tech)).toBeInTheDocument();
     }
   });
 
-  // Feature: portfolio-upgrade, Property 2: Hero CTA buttons preserve aria-labels
-  it("both CTA buttons preserve their aria-labels", () => {
-    // Validates: Requirements 1.6
-    const REQUIRED_ARIA_LABELS = [
-      "View my projects",
-      "Download resume PDF",
-    ] as const;
-
+  it("renders the resume link with correct href and accessible name", () => {
     render(<Hero />);
 
-    for (const label of REQUIRED_ARIA_LABELS) {
-      expect(screen.getByLabelText(label)).toBeInTheDocument();
-    }
+    const resumeLink = screen.getByLabelText("Download Dinesh Ramar resume PDF");
+    expect(resumeLink).toBeInTheDocument();
+    expect(resumeLink).toHaveAttribute("href", "/Dinesh_Ramar_ReactJS_Resume.pdf");
+    expect(resumeLink).toHaveAttribute("download");
+  });
+
+  it("renders the projects CTA with correct accessible name", () => {
+    render(<Hero />);
+
+    const workCta = screen.getByLabelText("View my work");
+    expect(workCta).toBeInTheDocument();
   });
 });

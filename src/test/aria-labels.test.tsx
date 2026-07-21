@@ -48,8 +48,8 @@ describe('Property 15 – Hero: icon-only/ambiguous interactives have aria-label
      * explicitly requires their aria-labels to be present and non-empty.
      */
     const HERO_ARIA_LABELS = [
-        'View my projects',
-        'Download resume PDF',
+        'View my work',
+        'Download Dinesh Ramar resume PDF',
     ] as const
 
     it('every required interactive element has a non-empty aria-label', () => {

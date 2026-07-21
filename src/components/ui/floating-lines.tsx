@@ -84,8 +84,8 @@ uniform int lineGradientCount;
 uniform float uIntensity;
 
 const vec3 BLACK = vec3(0.0);
-const vec3 PINK  = vec3(233.0, 71.0, 245.0) / 255.0;
-const vec3 BLUE  = vec3(47.0,  75.0, 162.0) / 255.0;
+const vec3 DARK_GRAY = vec3(64.0) / 255.0;
+const vec3 SILVER    = vec3(192.0) / 255.0;
 
 mat2 rotate(float r) {
   return mat2(cos(r), sin(r), -sin(r), cos(r));
@@ -97,8 +97,8 @@ vec3 background_color(vec2 uv) {
   float y = sin(uv.x - 0.2) * 0.3 - 0.1;
   float m = uv.y - y;
 
-  col += mix(BLUE, BLACK, smoothstep(0.0, 1.0, abs(m)));
-  col += mix(PINK, BLACK, smoothstep(0.0, 1.0, abs(m - 0.8)));
+  col += mix(DARK_GRAY, BLACK, smoothstep(0.0, 1.0, abs(m)));
+  col += mix(SILVER, BLACK, smoothstep(0.0, 1.0, abs(m - 0.8)));
   return col * 0.5;
 }
 
@@ -124,7 +124,7 @@ vec3 getLineColor(float t, vec3 baseColor) {
     gradientColor = mix(c1, c2, f);
   }
 
-  return gradientColor * 0.5;
+  return gradientColor * 0.6;
 }
 
   float wave(vec2 uv, float offset, vec2 screenUv, vec2 mouseUv, bool shouldBend) {
@@ -143,7 +143,7 @@ vec3 getLineColor(float t, vec3 baseColor) {
   }
 
   float m = uv.y - y;
-  return 0.0175 / max(abs(m) + 0.01, 1e-3) + 0.01;
+  return 0.026 / max(abs(m) + 0.01, 1e-3) + 0.01;
 }
 
 void mainImage(out vec4 fragColor, in vec2 fragCoord) {
@@ -239,13 +239,13 @@ type WavePosition = {
 };
 
 export type FloatingLinesProps = {
-  /** Gradient stops applied along the lines. Defaults to the portfolio teal palette. */
+  /** Gradient stops applied along the lines. Defaults to the portfolio grayscale palette. */
   linesGradient?: string[];
   /** Which wave bands to render. All three are enabled by default for density. */
   enabledWaves?: Array<"top" | "middle" | "bottom">;
   /** Line count per wave (matches enabledWaves order) or a single number for all. */
   lineCount?: number | number[];
-  /** Spacing per wave (matches enabledWaves order) or a single number for all. */
+  /** Line spacing per wave (matches enabledWaves order) or a single number for all. */
   lineDistance?: number | number[];
   topWavePosition?: WavePosition;
   middleWavePosition?: WavePosition;
@@ -260,6 +260,8 @@ export type FloatingLinesProps = {
   parallaxStrength?: number;
   /** Overall brightness multiplier. Lower = more subtle. */
   intensity?: number;
+  /** CSS mix-blend-mode for the canvas container. Defaults to 'screen' per the original React Bits component. */
+  mixBlendMode?: React.CSSProperties['mixBlendMode'];
   /**
    * Optional external pointer-event target. Use this when the canvas must stay
    * pointer-events:none but should still react to movement over foreground UI.
@@ -295,7 +297,7 @@ function hexToVec3(hex: string): Vector3 {
   return new Vector3(r / 255, g / 255, b / 255);
 }
 
-const PORTFOLIO_GRADIENT = ["#0B1120", "#10213A", "#0F766E"];
+const PORTFOLIO_GRADIENT = ["#1A1A1A", "#737373", "#D4D4D4"];
 
 export default function FloatingLines({
   linesGradient = PORTFOLIO_GRADIENT,
@@ -313,6 +315,7 @@ export default function FloatingLines({
   parallax = true,
   parallaxStrength = 0.15,
   intensity = 0.35,
+  mixBlendMode = "screen",
   eventTargetRef,
   className,
   style,
@@ -637,7 +640,10 @@ export default function FloatingLines({
       ref={containerRef}
       aria-hidden="true"
       className={["floating-lines-canvas", className].filter(Boolean).join(" ")}
-      style={style}
+      style={{
+        mixBlendMode,
+        ...style,
+      }}
     />
   );
 }
