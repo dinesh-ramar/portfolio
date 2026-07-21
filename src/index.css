@@ -36,31 +36,29 @@
 
 @layer base {
   :root {
-    --background: 210 40% 98%;
-    --foreground: 222 47% 11%;
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3%;
     --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
-    --primary: 173 80% 24%;
+    --card-foreground: 0 0% 3%;
+    --primary: 0 0% 8%;
     --primary-foreground: 0 0% 100%;
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 47%;
-    --border: 214 32% 91%;
+    --muted: 0 0% 95%;
+    --muted-foreground: 0 0% 40%;
+    --border: 0 0% 82%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --secondary: 173 40% 96%;
-    --secondary-foreground: 173 80% 24%;
+    --secondary: 0 0% 95%;
+    --secondary-foreground: 0 0% 10%;
     --radius: 0.5rem;
-    /* Shared glow teal — single source of truth for all glow colors.
-       Glows intentionally use a brighter teal than light-mode --primary
-       so they stay visible on light surfaces; dark mode reuses it. */
-    --glow-teal: 173 58% 39%;
-    /* Glow & shadow design tokens — all derived from --glow-teal */
-    --glow-subtle: 0 4px 24px hsl(var(--glow-teal) / 0.08);
-    --glow-medium: 0 8px 32px hsl(var(--glow-teal) / 0.10);
-    --glow-strong: 0 8px 32px hsl(var(--glow-teal) / 0.12);
-    --glow-radial-subtle: hsl(var(--glow-teal) / 0.07);
-    --glow-spotlight: hsl(var(--glow-teal) / 0.08);
-    --glow-floating-line: hsl(var(--glow-teal));
+    /* Shared neutral glow accent — single source of truth for all glows. */
+    --glow-accent: 0 0% 18%;
+    /* Glow & shadow design tokens — all derived from --glow-accent */
+    --glow-subtle: 0 4px 24px hsl(var(--glow-accent) / 0.06);
+    --glow-medium: 0 8px 32px hsl(var(--glow-accent) / 0.10);
+    --glow-strong: 0 8px 32px hsl(var(--glow-accent) / 0.14);
+    --glow-radial-subtle: hsl(var(--glow-accent) / 0.04);
+    --glow-spotlight: hsl(var(--glow-accent) / 0.06);
+    --glow-floating-line: hsl(var(--glow-accent) / 0.32);
     /* Standardized opacity scale for background/decorative layers */
     --o-line: 1;
     --o-hover-border: 0.4;
@@ -68,27 +66,27 @@
   }
 
   .dark {
-    --background: 222 47% 11%;
-    --foreground: 210 40% 98%;
-    --card: 222 47% 11%;
-    --card-foreground: 210 40% 98%;
-    --primary: 173 58% 39%;
-    --primary-foreground: 222 47% 11%;
-    --muted: 217 33% 17%;
-    --muted-foreground: 214 32% 91%;
-    --border: 217 33% 17%;
+    --background: 0 0% 0%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 4%;
+    --card-foreground: 0 0% 98%;
+    --primary: 0 0% 90%;
+    --primary-foreground: 0 0% 3%;
+    --muted: 0 0% 8%;
+    --muted-foreground: 0 0% 65%;
+    --border: 0 0% 16%;
     --destructive: 0 63% 31%;
     --destructive-foreground: 0 0% 100%;
-    --secondary: 173 20% 20%;
-    --secondary-foreground: 173 58% 39%;
+    --secondary: 0 0% 8%;
+    --secondary-foreground: 0 0% 90%;
     --radius: 0.5rem;
-    --glow-teal: 173 58% 39%;
-    --glow-subtle: 0 4px 24px hsl(var(--glow-teal) / 0.12);
-    --glow-medium: 0 8px 32px hsl(var(--glow-teal) / 0.15);
-    --glow-strong: 0 8px 32px hsl(var(--glow-teal) / 0.20);
-    --glow-radial-subtle: hsl(var(--glow-teal) / 0.10);
-    --glow-spotlight: hsl(var(--glow-teal) / 0.12);
-    --glow-floating-line: hsl(var(--glow-teal) / 0.6);
+    --glow-accent: 0 0% 90%;
+    --glow-subtle: 0 4px 24px hsl(var(--glow-accent) / 0.08);
+    --glow-medium: 0 8px 32px hsl(var(--glow-accent) / 0.12);
+    --glow-strong: 0 8px 32px hsl(var(--glow-accent) / 0.18);
+    --glow-radial-subtle: hsl(var(--glow-accent) / 0.06);
+    --glow-spotlight: hsl(var(--glow-accent) / 0.08);
+    --glow-floating-line: hsl(var(--glow-accent) / 0.60);
     --o-line: 0.6;
     --o-hover-border: 0.4;
     --o-accent: 0.5;
